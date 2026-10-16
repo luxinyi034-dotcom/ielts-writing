@@ -1,5 +1,5 @@
 /* 离线缓存：App 外壳先走缓存，字体首次联网后缓存 */
-const CACHE = 'ielts-writing-site-v10';
+const CACHE = 'ielts-writing-site-v11';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/apple-touch-icon.png', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {

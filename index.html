@@ -1521,6 +1521,61 @@ input.tg-name:focus { outline: none; border-bottom-style: solid; border-bottom-c
 /* 旧版本预览：顶部一条提示 */
 .arch-bar { position: sticky; top: 0; z-index: 60; display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 8px 16px; background: #F6E7E2; color: var(--ink); font-size: 13.5px; border-bottom: 1px solid var(--line); }
 .arch-bar a { color: var(--sage-deep); font-weight: 600; }
+
+/* ============================================================
+   v11 · 主菜：推荐话题卡、换一个话题
+   ============================================================ */
+.t-newcard { display: flex; flex-direction: column; gap: 8px; }
+.t-newname { font-family: var(--f-title); font-size: 22px; color: var(--ink); }
+.t-newcard.compact { padding: 4px 4px 2px; }
+.t-newcard.compact .t-newname { font-size: 19px; }
+.t-newdone { display: flex; gap: 8px; align-items: flex-start; background: var(--sage-soft); border-radius: 12px; padding: 8px 12px; color: var(--sage-deep); font-size: 13.5px; }
+.t-newdone svg { width: 16px; height: 16px; flex: 0 0 auto; margin-top: 2px; }
+.t-newfoot { display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 1px solid var(--line); margin-top: 12px; padding-top: 10px; }
+.t-tpsheet { max-width: 560px; }
+.t-tplist { display: flex; flex-direction: column; gap: 14px; max-height: min(60vh, 520px); overflow-y: auto; padding: 2px; }
+.t-tpgroup { display: flex; flex-direction: column; gap: 6px; }
+.t-tpth { font-size: 12.5px; color: var(--muted); letter-spacing: .04em; }
+.t-tprow { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; color: var(--ink); cursor: pointer; }
+.t-tprow:hover { border-color: var(--sage); }
+.t-tprow .nm { flex: 1; font-size: 15.5px; display: flex; gap: 8px; align-items: center; }
+.t-tprow .ct { font-size: 13px; color: var(--warm); }
+.t-tprow svg { width: 16px; height: 16px; color: var(--muted); }
+.t-tprow.off { opacity: .55; cursor: default; }
+
+/* ============================================================
+   v11 · 范文默写：空格就是输入框；操作条固定在屏幕下方
+   ============================================================ */
+.t-fillpara { line-height: 2.75; }
+.t-blank { max-width: 100%; margin: 0 3px; }
+.t-blank .box { min-width: 160px; min-height: 1.55em; padding: 3px 12px; border-radius: 10px; overflow-wrap: anywhere; line-height: 1.45; }
+.t-blank small { max-width: 100%; margin-top: 3px; padding-left: 2px; line-height: 1.35; }
+.t-blank.tap .box { border-color: color-mix(in srgb, var(--sage) 55%, var(--line)); }
+.t-blank.cur.inl .box { display: inline-flex; align-items: center; min-width: 0; background: var(--paper); border: 2px solid var(--sage-deep); padding: 4px 12px; cursor: text; }
+.t-inl { display: inline-block; max-width: 100%; min-height: 1.45em; outline: none; white-space: pre-wrap; word-break: break-word; caret-color: var(--sage-deep); color: var(--ink); }
+.t-inl:empty::before { content: '在这里写'; color: var(--muted); font-family: var(--f-ui); font-size: 14px; }
+.t-blank.ok .box, .t-blank.form .box, .t-blank.bad .box { min-width: 0; }
+.t-fillbar { position: sticky; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 8; margin-top: 16px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 10px 28px rgba(60, 64, 48, .14); padding: 10px 16px; gap: 8px 14px; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+.t-fillbar > .qtype { flex: 1 1 260px; min-width: 0; }
+.t-fillbar > .t-inlform { flex: 0 1 auto; }
+.t-fillbar > .fb { flex: 1 1 100%; padding: 8px 12px; }
+.t-fillbar .fb .line:not(:last-child) { display: none; } /* 自己写的已经在文章里显示，这里只留结论和正确写法 */
+.t-fillbar .fb .verdict { margin-bottom: 2px; }
+.t-fillbar > .btn-row, .t-fillbar > form.form { flex: 1 1 100%; }
+.t-fillbar .qtype { margin: 0; }
+.t-inlform { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.t-inlform .t-hint { margin: 0; }
+.t-fillbar .fb { margin: 0; }
+@media (max-width: 720px) {
+  .t-blank .box { min-width: 120px; }
+  .t-fillbar { padding: 10px 12px; }
+}
+.t-inl { min-width: min(var(--w, 8em), 62vw); }
+@media (max-width: 720px) {
+  .t-para-grid.pp { grid-template-columns: minmax(0, 1fr); }
+  .t-blank.cur.inl, .t-blank.cur.inl .box { max-width: 100%; }
+}
+@media (max-width: 720px) { .t-fillbar { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); } }
 </style>
 </head>
 <body>
@@ -1618,7 +1673,7 @@ const TOPICS3 = (window.__DEMO && window.__DEMO.topics) || [];
 
 const IMPORT_GUIDE = "# 导入规范（v9）\n\nv9 不带任何预设内容，表达库里的东西都由你自己导入。一共三种内容：**写作笔记**（表达卡、句型卡、语法卡）、**功能表达**、**主题表达**（话题，含话题词汇）。这份说明写清楚每一种要写什么、怎么写，照着写就能被准确认出来。\n\n## 一、怎么导入\n\n1. 用任何文字编辑器写（备忘录、Typora、Obsidian、记事本、Word 另存为纯文本都可以），保存成 **.md** 或 **.txt** 文件，编码用 **UTF-8**（大多数编辑器默认就是）。\n2. 在 App 里打开“主题表达”“功能表达”或“我的写作笔记”页右上角的“导入”，选“导入 .md / .txt 文件”；也可以直接把文字粘贴到输入框里。\n3. 点“整理”，先进**确认页**：每一条认成了什么、有没有问题都会列出来，可以直接改。确认后才进入学习。\n\n建议**每种内容一个文件**：`写作笔记.md`、`功能表达.md`、`主题表达.md`（可以按话题分成多个文件）。三种也可以写在同一个文件里，App 会分开认，确认页按三个标签分别确认。\n\n导入页、本页最上面可以下载三份**模板**（template-topics.md、template-functions.md、template-notes.md），模板本身就能直接导入成功，照着改最省事。\n\n## 二、通用写法（三种都一样）\n\n- **一行一条**：英文在前，中文在后，中间空一格。例：`have a profound impact on 对……产生深远影响`\n- **行首的 `- ` 或 `1.` 可写可不写**，缩进也可有可无，只是为了自己看着清楚。\n- **补充内容写在这一条的下一行**，格式 `标签：内容`。中文冒号“：”、英文冒号“:”都可以。写作笔记和功能表达里，同一个标签写两行会合在一起。\n- **标题用 `#`**，`#` 后面要空一格。全角的“＃”也能认。\n- **英文部分不要用中文标点**。App 从第一个中文字符或中文标点（，：；（）开始算中文，英文里夹了中文标点会被切开。英文里的括号、逗号请用半角。\n- **学习方式**：行末写【记忆】【资料】【暂缓】就按写的来；写在 `#` 标题后面，整组都按它；都不写就用“复习设置 → 导入时的默认学习方式”。\n  - 记忆：进新学和复习；资料：只查阅；暂缓：先放着。\n- **说明文字**：用 `\u003c!--` 和 `-->` 包起来的内容导入时会忽略（模板最上面的说明就是这样写的）。单独一行的 `---` 分隔线、加粗用的 `**` 也会忽略。\n- **重复导入不会重复**：同一类型、英文一样的卡，第二次导入会跳过，确认页会告诉你跳过了哪些。所以可以一直往同一个文件里加内容，每次整份重新导入。\n\n## 三、写作笔记\n\n### 三种卡怎么认\n\n| 卡片 | 怎么写 | App 怎么认 |\n|---|---|---|\n| 表达卡 | `英文 中文` | 普通的一行 |\n| 句型卡 | `句型 中文` | 英文里有 `...`、`…`、`sb`、`sth`、`___` 或 `[ ]` |\n| 语法卡 | `❌ 错误写法 → ✅ 正确写法 中文说明` | 有 ❌ / → / ✅；也可以写 `错误：… 正确：…` |\n\n认错了类型可以在确认页改（每行最前面的“表达 / 句型 / 语法”）。\n\n### 分组\n\n- `# 标题` 下面的卡是一组，组名就是标题，新学和复习都按组来。\n- 同一个标题下**至少 2 张同类卡**才成一组；只有 1 张的放进“独立卡片”。\n- 一个标题下混了几种卡，会按类型分成几组（同一个组名）。\n\n### 每种卡能写的标签\n\n| 卡片 | 必填 | 选填标签 |\n|---|---|---|\n| 表达卡 | 英文 + 中文 | 例句、搭配、场景、常见错误 |\n| 句型卡 | 句型 + 中文 | 例句、可替换、场景、常见错误 |\n| 语法卡 | 错误 → 正确 | 规则、例句、限制（中文说明写在正确写法后面） |\n\n```\n# 强调深远影响\n- have a profound impact on 对……产生深远影响\n  - 例句：Social media has had a profound impact on the way young people communicate.\n  - 搭配：have a profound / significant / lasting impact on sth\n  - 场景：强调影响深远且持久，适合主体段的结果句\n  - 常见错误：不写 have a profound impact to\n- play a pivotal role in 在……中起关键作用\n\n# 引出原因的句型\n- One reason for this is that ... 其中一个原因是……\n  - 可替换：this 可换成具体现象\n- This is largely due to the fact that ... 这在很大程度上是因为……\n\n# 我的语法错误\n- ❌ The number of cars are increasing. → ✅ The number of cars is increasing. 主语是 the number，谓语用单数\n  - 规则：the number of + 复数名词作主语时，谓语用单数\n  - 限制：a number of + 复数名词，谓语用复数\n```\n\n## 四、功能表达\n\n- 每个写作功能一个标题，**必须写成 `# 功能：功能名`**（例如 `# 功能：表达观点`）。没有“功能：”的标题会被当成写作笔记。\n- 标题下面一行一条：英文 + 中文。\n- 同名的功能再导入会并到一起，在功能表达页一起做近义比较。\n- 功能表达默认是“资料”；要背的条目在行末写【记忆】，整组都背就写在标题后面。\n\n| 必填 | 选填标签 |\n|---|---|\n| 英文 + 中文 | 后面接（句法结构）、语气、区别（进近义比较表）、例句、常见错误 |\n\n```\n# 功能：表达观点\n- I firmly believe that ... 我坚信……【记忆】\n  - 后面接：+ 完整句子\n  - 语气：立场鲜明，比较正式\n  - 区别：比 In my view 更坚定，全文只用一次\n  - 例句：I firmly believe that schools should teach practical life skills.\n  - 常见错误：不写 I firmly believe in that ...\n- From my perspective, ... 在我看来……\n```\n\n## 五、主题表达（话题）\n\n### 结构\n\n```\n# 话题：话题名\n大主题：工作\n关键概念：远程办公、通勤、工作效率\n\n## 立场：支持 | 这一边的核心想法\n### 论点：短名\n- 论点句英文 论点句中文\n- 解释：展开表达英文 中文\n- 结果：展开表达英文 中文\n- 举例：展开表达英文 中文\n范文：整段范文……\n\n### 论点：短名\n……\n\n## 立场：反对 | 另一边的核心想法\n### 论点：短名\n……\n\n## 话题词汇\n- 词汇英文 中文\n```\n\n- `# 话题：` 只能用**一个 #**；`## 立场：`、`### 论点：` 分别用两个、三个 #。\n- 立场名和核心想法之间用 `|` 隔开（也可以用全角空格或两个空格）。\n- 论点下面**第一行**是论点句；之后每条展开表达用这几个开头：**解释：结果：举例：原因：对比：让步：补充：影响：**\n- **范文**写在每个论点的最后，以 `范文：` 开头。可以写在同一行，也可以换行接着写；范文后面直到下一个 `###` 或 `##` 之前，不是 `- ` 开头的行都算范文。\n\n### 必须写的（少了不能导入）\n\n1. 新话题**至少 2 个立场**（选论点时要两边搭配）。\n2. 每个论点有**论点句**、**至少一条展开表达**、**范文**。\n3. 论点句和每条展开表达都要**原样出现在范文里**（不分大小写）。展开表达在范文里写法不一样（改了时态、单复数）时，在它下面加一行 `范文里写成：范文里的写法`。\n\n确认页会按行号告诉你哪里不满足，改完原文再导入。\n\n### 选填标签\n\n| 写在哪一行下面 | 标签 | 写法 |\n|---|---|---|\n| 话题（# 话题 下面） | 大主题 | 话题列表按大主题分组；不写放在“我导入的话题” |\n| | 关键概念 | 用顿号“、”隔开 |\n| 论点句 | 可替换 | 论点句里能换的位置，用 `/` 隔开 |\n| | 换个话题 | 把这个句式套到别的话题的一句 |\n| 展开表达 | 原形 | 词典里的原形，如 `spend time doing sth` |\n| | 引导句 | 范文里引出它的半句，如 `This is because they …` |\n| | 提醒 | 用法提醒 |\n| | 也可以说 | 同义替换，用 `/` 隔开 |\n| | 范文里写成 | 范文里的实际写法 |\n| | 搭配 | 常用搭配，可以写多行 |\n| | 拆分 | `词 词性 \\| 词 词性`，如 `spend 动词 \\| less time 名词短语` |\n| 话题词汇 | 范畴 | 如 伦理、问题、交通方式 |\n| | 词性 | 如 n. 不可数 |\n| | 例句 | `英文例句 / 中文翻译` |\n| | 动词搭配 | `英文 中文`，可以写多行 |\n| | 这样写 / 不这样写 | 用 `/` 隔开 |\n\n### 学习方式\n\n- 论点什么时候背，在 App 里“选论点”时决定，不用在文件里写。\n- 【记忆】【资料】【暂缓】只对话题词汇有用，不写就是“资料”（可在复习设置里改默认）。\n\n### 补充已有的话题\n\n同名话题再导入一次会**补进去**：新的论点接在后面；已有的论点（短名或论点句一样）和话题词汇跳过；学习进度不变。补充时不要求两个立场。\n\n## 六、导入以后\n\n- **确认页**：每条都能改文字、类型、分组、学习方式，也能删除；能先“看详情页”看导入后的样子，用“编辑”改每一块。没认出来的行在最上面，每行选“当成表达卡 / 当备注 / 不要”，都处理完才能确认。\n- **导入历史**（左侧“我的”下面）：每次导入留一条，点开能看到这次导入了什么。\n- **备份**：数据只存在这台设备的浏览器里。建议把 App 添加到主屏幕使用，并时常在“复习设置 → 数据”里导出备份。原始的 .md 文件也请自己留好。\n\n## 七、没认出来怎么办\n\n| 现象 | 原因 | 改法 |\n|---|---|---|\n| 一行变成“没认出来” | 这一行没有英文，或者标签名不在上面的表里 | 改成 `英文 中文`，或用表里的标签名 |\n| 中文跑到了英文里 / 英文被截断 | 英文部分用了中文标点 | 英文里的标点改成半角 |\n| 表达被认成句型卡 | 英文里有 `...` / `sb` / `sth` | 确认页把类型改回“表达” |\n| 功能表达被当成笔记 | 标题少了“功能：” | 标题写成 `# 功能：功能名` |\n| 论点句 / 展开表达“在范文里找不到” | 范文里的写法和这一行不完全一样 | 改成一样，或加 `范文里写成：` |\n| “新话题至少要两个立场” | 只写了一个 `## 立场：` | 补另一边的立场和论点 |\n| 补充标签挂错了地方 | 标签必须写在它所属那一行的**正下方** | 把标签行挪到对应的卡 / 表达下面 |\n\n## 附：全部标签速查\n\n| 用在 | 标签（括号里是也能认的别名） |\n|---|---|\n| 表达卡 / 句型卡 / 语法卡 | 例句（例子、示例、示例句、正确例句、example）、搭配（常用搭配）、场景（使用场景、适用场景、用法、使用提醒）、常见错误（易错、易错点、个人错误）、可替换（可替换位置、替换）、规则（语法规则）、限制（使用限制） |\n| 功能表达 | 后面接（句法、句法结构）、语气（语气和边界）、区别（近义区别）、例句、常见错误 |\n| 话题 | 大主题、关键概念 |\n| 论点句 | 可替换、换个话题 |\n| 展开表达开头 | 解释、结果、举例、原因、对比、让步、补充、影响 |\n| 展开表达下面 | 原形、引导句、提醒、也可以说、范文里写成、搭配、拆分 |\n| 话题词汇 | 范畴、词性、例句、动词搭配、这样写、不这样写 |\n| 学习方式 | 【记忆】【资料】【暂缓】（方括号 [记忆] 也可以） |\n";
 const IMPORT_TPL = {"topic": "\u003c!--\n主题表达导入模板（v9）\n层级：# 话题 → ## 立场 → ### 论点 → 论点句、展开表达、范文；最后 ## 话题词汇。\n\n必须写的（少了不能导入，确认页会告诉你哪一行）：\n- 新话题至少 2 个立场（选论点时要两边搭配）。\n- 每个论点：论点下面第一行是论点句（英文 + 中文）；至少一条展开表达；一段范文。\n- 论点句、每条展开表达都要原样出现在范文里（不分大小写）。\n  展开表达在范文里写法不一样时（比如改了时态、复数），在它下面加一行“范文里写成：……”。\n\n展开表达用这几个开头：解释： 结果： 举例： 原因： 对比： 让步： 补充： 影响：\n\n选填标签（写在对应那一行的下面）：\n- 话题下面：大主题： 关键概念：（用顿号隔开）\n- 论点句下面：可替换：（论点句里能换的位置，用 / 隔开）  换个话题：（套到别的话题的一句）\n- 展开表达下面：原形： 引导句： 提醒： 也可以说：（用 / 隔开） 范文里写成： 搭配： 拆分：（词 词性 | 词 词性）\n- 话题词汇下面：范畴： 词性： 例句：（英文 / 中文） 动词搭配：（英文 中文） 这样写： 不这样写：（用 / 隔开）\n\n学习方式：论点什么时候背，在 App 里“选论点”时决定；【记忆】【资料】【暂缓】只对话题词汇有用，不写就是“资料”。\n同名话题再导入一次会补进去：新的论点接在后面，已有的论点、词汇跳过，学习进度不变。\n这种说明段落（注释）导入时会自动忽略。把下面的示例换成你自己的内容。\n-->\n\n# 话题：远程办公\n大主题：工作\n关键概念：远程办公、通勤、工作效率、团队合作\n\n## 立场：支持 | 远程办公对员工和城市都有好处\n\n### 论点：通勤\n- Working from home saves employees hours of commuting every week. 在家办公每周为员工节省好几个小时的通勤时间\n  - 可替换：Working from home / employees / commuting\n  - 换个话题：Online shopping saves consumers hours of travelling every month.\n- 解释：spend less time stuck in traffic 堵在路上的时间更少\n  - 原形：spend time doing sth\n  - 引导句：This is because they …\n  - 提醒：spend time 后面接 doing，不接 to do\n  - 也可以说：avoid the daily rush hour / skip the long journey to work\n  - 搭配：spend time / money / energy doing sth\n  - 拆分：spend 动词 | less time 名词短语 | stuck in traffic 被困在车流里\n- 结果：achieve a better work-life balance 实现更好的工作与生活平衡\n- 举例：parents with young children 带小孩的父母\n范文：Working from home saves employees hours of commuting every week. This is because they spend less time stuck in traffic and more time on meaningful tasks. As a result, many of them achieve a better work-life balance. For example, parents with young children can take their children to school and still start work on time.\n\n### 论点：效率\n- Many employees are more productive in a quiet home environment. 很多员工在安静的家里效率更高\n- 解释：fewer interruptions from colleagues 来自同事的打扰更少\n- 结果：complete tasks efficiently 高效地完成任务\n  - 范文里写成：complete tasks more efficiently\n范文：Many employees are more productive in a quiet home environment. They face fewer interruptions from colleagues, so they can focus on difficult work for longer. Consequently, they often complete tasks more efficiently than they would in a busy office.\n\n## 立场：反对 | 远程办公会削弱团队合作和员工的归属感\n\n### 论点：沟通\n- Remote work can weaken communication within a team. 远程办公会削弱团队内部的沟通\n- 解释：lack face-to-face contact 缺少面对面的交流\n- 结果：lead to misunderstandings 导致误解\n- 举例：new employees 新员工\n范文：Remote work can weaken communication within a team. When colleagues lack face-to-face contact, small problems are not discussed in time. This can easily lead to misunderstandings and delays. For example, new employees may find it hard to ask questions and learn from experienced staff.\n\n### 论点：孤独\n- Working alone at home can make people feel isolated. 一个人在家工作会让人感到孤立\n- 解释：miss out on social interaction 错过与人交往的机会\n- 结果：harm their mental health 损害心理健康\n范文：Working alone at home can make people feel isolated. Without an office, they miss out on social interaction with their colleagues. Over time, this may harm their mental health and reduce their motivation.\n\n## 话题词汇\n- remote work 远程办公【记忆】\n  - 范畴：工作方式\n  - 词性：n. 不可数\n  - 例句：Remote work has become common since 2020. / 2020 年以来远程办公变得很普遍。\n  - 动词搭配：switch to remote work 改为远程办公\n  - 这样写：remote work / working from home\n  - 不这样写：remote works\n- work-life balance 工作与生活的平衡\n  - 范畴：生活质量\n  - 词性：n.\n  - 例句：Flexible hours help employees achieve a better work-life balance.\n- productivity 生产效率\n  - 范畴：工作表现\n  - 词性：n. 不可数\n", "fn": "\u003c!--\n功能表达导入模板（v9）\n- 每个写作功能一个标题，必须写成“# 功能：功能名”，例如 # 功能：表达观点。\n  同名的功能再导入会并到一起，在功能表达页里一起做近义比较。\n- 标题下面一行一条：英文在前，中文在后，中间空一格。\n- 补充内容写在下一行“标签：内容”：\n    后面接：句法结构（+ 完整句子 / + 名词）\n    语气：正式程度、立场强弱\n    区别：和同功能其他表达有什么不同（会出现在近义比较表里）\n    例句：一句完整的例句\n    常见错误：容易写错的地方\n- 功能表达默认是“资料”（只查阅，不进新学和复习）；要背的条目在行末写【记忆】，整组都背就写在标题后面。\n- 这种说明段落（注释）导入时会自动忽略。把下面的示例换成你自己的内容。\n-->\n\n# 功能：表达观点\n- I firmly believe that ... 我坚信……【记忆】\n  - 后面接：+ 完整句子\n  - 语气：立场鲜明，比较正式\n  - 区别：比 In my view 更坚定，全文只用一次\n  - 例句：I firmly believe that schools should teach practical life skills.\n  - 常见错误：不写 I firmly believe in that ...\n- From my perspective, ... 在我看来……\n  - 后面接：+ 完整句子\n  - 语气：中性，稍微客观一些\n  - 区别：比 I think 正式，适合开头段\n  - 例句：From my perspective, the benefits of online learning outweigh its drawbacks.\n\n# 功能：原因与解释\n- Owing to the fact that ... 由于……\n  - 后面接：+ 完整句子\n  - 语气：正式\n  - 区别：比 because 正式，句子较长时用\n  - 例句：Owing to the fact that housing is expensive, many young people choose to rent.\n- The root cause of this is ... 根本原因是……\n  - 后面接：+ 名词 / that 从句\n  - 区别：强调最深层的那个原因\n  - 例句：The root cause of this is a lack of affordable housing.\n", "notes": "\u003c!--\n写作笔记导入模板（v9）\n- 一行一张卡：英文在前，中文在后，中间空一格。行首的“- ”可写可不写。\n- 卡的类型自动认：\n    表达卡：普通英文 + 中文\n    句型卡：英文里有 ... 或 … 或 sb / sth（例：One reason for this is that ...）\n    语法卡：❌ 错误写法 → ✅ 正确写法 中文说明\n- 补充内容写在卡的下一行，格式“标签：内容”（前面缩进两格，中英文冒号都可以）。\n- “# 标题”下面的卡是一组；同一个标题下至少 2 张同类卡才成一组，只有 1 张的会单独放。\n- 学习方式：行末写【记忆】【资料】【暂缓】；写在标题后面整组都按它；不写按“复习设置”里的默认值。\n- 这种说明段落（注释）导入时会自动忽略，可以删掉，也可以留着。\n- 把下面的示例换成你自己的内容。\n-->\n\n# 强调深远影响\n- have a profound impact on 对……产生深远影响\n  - 例句：Social media has had a profound impact on the way young people communicate.\n  - 搭配：have a profound / significant / lasting impact on sth\n  - 场景：强调影响深远且持久，比 affect 更正式，适合主体段的结果句\n  - 常见错误：impact 后用 on，不写 have a profound impact to\n- play a pivotal role in 在……中起关键作用\n  - 例句：Teachers play a pivotal role in shaping students' values.\n  - 搭配：play a key / crucial / pivotal role in doing sth\n  - 场景：强调“关键作用”，in 后面接名词或动名词\n\n\u003c!-- 句型卡：英文里有 ... 就是句型卡。可以多写一个“可替换：”，说明哪些位置能换 -->\n# 引出原因的句型\n- One reason for this is that ... 其中一个原因是……\n  - 可替换：this 可换成具体现象；that 后面接完整的原因句\n  - 例句：One reason for this is that housing in big cities is expensive.\n  - 场景：主体段列举多个原因时，引出其中一个\n  - 常见错误：不写 One reason is because ...\n- This is largely due to the fact that ... 这在很大程度上是因为……\n  - 可替换：largely 可换成 partly / mainly\n  - 例句：This is largely due to the fact that more people now work from home.\n\n\u003c!-- 语法卡：❌ 错 → ✅ 对，后面跟中文说明。补充用“规则：”“例句：”“限制：” -->\n# 我的语法错误\n- ❌ The number of cars are increasing. → ✅ The number of cars is increasing. 主语是 the number，谓语用单数\n  - 规则：the number of + 复数名词作主语时，真正的主语是 number，谓语用单数\n  - 例句：The number of international students has doubled since 2010.\n  - 限制：a number of（许多）+ 复数名词，谓语用复数\n- ❌ have a great influence to → ✅ have a great influence on 介词用 on\n  - 规则：influence 作名词表示“对……的影响”时，介词用 on\n\n\u003c!-- 整组设成“资料”：标签写在标题后面 -->\n# 零散积累【资料】\n- a double-edged sword 一把双刃剑\n  - 例句：Technology is a double-edged sword.\n- strike a balance between A and B 在 A 和 B 之间取得平衡【记忆】\n"};
-const CHANGELOG = [{"version": "v10", "date": "2026-10-16", "notes": ["搬到独立网站：主地址永远是最新版，添加到主屏幕一次就够了；以前的每个版本都单独保留", "数据保护：所有版本共用同一份数据；每天、换新版本、找回 / 恢复 / 清空之前都会自动备份，设置里能一键恢复", "存储空间不够时先腾出旧的自动备份，还是存不下会明确提醒；读不出来的数据原样另存，不会被覆盖", "每 7 天提醒导出一次备份", "包含 v9 的全部功能：从空白开始、导入格式说明和模板、考前冲刺、今日学习时间线、配菜、学习记录、详情页、导入、编辑"]}, {"version": "v9", "date": "2026-10-15", "site": "old", "notes": ["从空白开始，导入格式说明和模板，考前冲刺，找回以前导入的内容"]}];
+const CHANGELOG = [{"version": "v11", "date": "2026-10-16", "notes": ["今日新学可以自己选话题：首页和今日学习都有“换一个话题”，按大主题列出还有没学论点的话题", "主菜每天学几组可以改（编排设置里 1–6 组）；今日学习显示“今天 n / m 组”，学完一组接着推荐下一组", "今日学习的主菜不再列出全部话题，只放一张“今天学这个”卡，下面可以看全部话题", "范文默写直接在文章里的空格写：写完按回车检查，检查、提示、看答案在屏幕下方的操作条里，不用翻页（范文页练习、新学的范文填空、复习的范文填空都一样）", "写过的内容一直保留：切换默写方式、看提示、换论点都不丢；每个论点的默写练习单独保存，关掉 App 再打开也还在，只有“重新开始”（点两次）才清空", "空格更大，写得长会自动变宽、换行，完整显示；检查后在原处显示对错"]}, {"version": "v10", "date": "2026-10-16", "notes": ["搬到独立网站：主地址永远是最新版，添加到主屏幕一次就够了；以前的每个版本都单独保留", "数据保护：所有版本共用同一份数据；每天、换新版本、找回 / 恢复 / 清空之前都会自动备份，设置里能一键恢复", "存储空间不够时先腾出旧的自动备份，还是存不下会明确提醒；读不出来的数据原样另存，不会被覆盖", "每 7 天提醒导出一次备份", "包含 v9 的全部功能：从空白开始、导入格式说明和模板、考前冲刺、今日学习时间线、配菜、学习记录、详情页、导入、编辑"]}, {"version": "v9", "date": "2026-10-15", "site": "old", "notes": ["从空白开始，导入格式说明和模板，考前冲刺，找回以前导入的内容"]}];
 
 (function () {
 'use strict';
@@ -1684,7 +1739,7 @@ function toast(msg) {
 // - 读不懂的数据绝不覆盖，先原样另存一份；存储空间不够时先腾出旧的自动备份，还是存不下就明确提醒
 // - 旧版本预览（window.__ARCHIVE）用数据的副本，改动不会碰到真正的记录
 const DATA_KEY = 'ielts-writing-v9';
-const APP_VERSION = 'v10';
+const APP_VERSION = 'v11';
 const KEY = window.__ARCHIVE ? 'ielts-writing-preview' : DATA_KEY;
 if (window.__ARCHIVE) { try { localStorage.setItem(KEY, localStorage.getItem(DATA_KEY) || ''); } catch (e) {} }
 function defaults() {
@@ -2196,7 +2251,29 @@ function render(scroll) {
   $('#view').innerHTML = out.body;
   if (scroll) window.scrollTo(0, 0);
   const a = $('#view .answer:not([readonly])');
-  if (a && out.focus) { try { a.focus({ preventScroll: true }); } catch (e) {} }
+  const inl = $('#view [data-inl]');
+  if (inl && (out.focus || ui.focusInl)) { inlFocus(inl); inlKeepVisible(inl); }
+  else if (!inl) { const last = $('#view .t-blank.last'); if (last) inlKeepVisible(last); }
+  else if (a && out.focus) { try { a.focus({ preventScroll: true }); } catch (e) {} }
+  ui.focusInl = false;
+}
+/* 文章里的空格：光标放到最后，不在屏幕里就滚到中间 */
+function inlFocus(el) {
+  try {
+    el.focus({ preventScroll: true });
+    const r = document.createRange(); r.selectNodeContents(el); r.collapse(false);
+    const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    const b = el.getBoundingClientRect();
+    if (b.top < 80 || b.bottom > window.innerHeight - 180) el.scrollIntoView({ block: 'center' });
+  } catch (e) {}
+}
+/* 写的空格变高时，别让它跑到下面的操作条后面 */
+function inlKeepVisible(el) {
+  try {
+    const bar = $('#view .t-fillbar'), b = el.getBoundingClientRect();
+    const limit = (bar ? bar.getBoundingClientRect().top : window.innerHeight) - 16;
+    if (b.bottom > limit) window.scrollBy(0, b.bottom - limit);
+  } catch (e) {}
 }
 
 /* ---------- 共享片段 ---------- */
@@ -2319,12 +2396,7 @@ function vHome() {
       <div class="progress"><span>${done} / ${ns.ids.length}</span><div class="pbar"><i style="width:${Math.round(done / ns.ids.length * 100)}%"></i></div></div>
       <div class="btn-row"><button class="btn btn-primary" type="button" data-a="resumenew">继续本组新学</button></div>`;
   } else if (rec3) {
-    const s3 = topicStats(rec3);
-    nw = `<div class="note-line">${esc(rec3.theme)} / 主题表达</div>
-      <h3 style="font-family:var(--f-title);font-size:22px">${esc(rec3.name)}</h3>
-      <p class="warm">${rec3.concepts.map(esc).join(' · ')}</p>
-      <p class="note-line">还有 ${s3.fresh} 个论点没学 · 一次学 3 个，组成一篇作文的写作思路</p>
-      <div class="btn-row"><button class="btn btn-primary" type="button" data-go="tpick:${rec3.id}">开始今日新学</button><button class="btn btn-outline" type="button" data-go="ttopic:${rec3.id}">查看话题</button></div>`;
+    nw = t3NewCard(false);
   } else {
     const ids = sdList();
     nw = ids.length ? `<div class="note-line">配菜 · 功能表达和我的笔记</div>
@@ -2365,6 +2437,7 @@ function vHome() {
       ${safetyBannerHTML()}
       ${legacyBannerHTML()}
       ${libEmpty() ? emptyLibHTML() : ''}
+      ${ui.t3tp ? topicPickerHTML() : ''}
       <section class="zone zone-learn" ${libEmpty() ? 'hidden' : ''}>
         <div class="zone-head"><h2>今天的学习</h2><span class="hint">${examTs() && diffDays(examTs()) >= 0 ? `距离考试 <b>${diffDays(examTs())}</b> 天 · ` : ''}复习节点：次日 · 3 天 · 7 天 · 14 天 · 30 天${S.t3.set.extend ? ' · 60 天' : ''}</span></div>
         <div class="grid">
@@ -3446,10 +3519,17 @@ function ppKeys(A, withSent) {
   return (withSent ? [A.id + ':s'] : []).concat(A.items.slice(1), termsInPara(A))
     .sort((a, b) => low.indexOf(blankAnswer(a).toLowerCase()) - low.indexOf(blankAnswer(b).toLowerCase()));
 }
+/* 默写练习：每个论点单独保存（S.t3.pp），切换论点、离开页面、关掉 App 都还在；不算学习记录 */
 function ppStart(argId, mode, withSent) {
   const A = T.arg.get(argId);
-  ui.t3pp = { arg: argId, mode: mode || 'both', sent: !!withSent, keys: ppKeys(A, withSent), res: {}, done: {}, cur: null, fb: null, hinted: false };
+  const all = S.t3.pp || (S.t3.pp = {});
+  let P = all[argId];
+  if (!P) P = all[argId] = { arg: argId, mode: mode || 'both', sent: !!withSent, res: {}, done: {}, cur: null, fb: null, hinted: false, draft: {} };
+  P.draft = P.draft || {};
+  P.keys = ppKeys(A, P.sent);
+  ui.t3pp = P;
 }
+const ppFilled = argId => { const P = (S.t3.pp || {})[argId]; return P ? Object.keys(P.res || {}).length + Object.values(P.draft || {}).filter(x => x && x.trim()).length : 0; };
 function t3Para(r) {
   const A = T.arg.get(r.id);
   if (!A) return { redirect: { v: 'topics' } };
@@ -3468,9 +3548,9 @@ function t3Para(r) {
       : `<div class="btn-row"><button class="btn btn-primary" type="button" data-a="t3retry" data-enter>再填一次</button><button class="btn btn-ghost" type="button" data-a="t3skipblank">跳过这一空</button></div>`;
     left = `<section class="panel"><div class="t-pphead"><b>默写练习 · 不记录</b><span class="note-line">已完成 ${doneN} / ${P.keys.length}</span></div>
       <div class="t-ppctl">${modeSeg('t3ppmode', P.mode)}<button class="t-chk ${P.sent ? 'on' : ''}" type="button" data-a="t3ppsent" aria-pressed="${P.sent}">${P.sent ? '✓ ' : ''}论点句也挖空</button></div>
-      <div class="t-fillpara" style="background:var(--paper)">${fillPara(A, P.keys, P.res, key, { mode: P.mode, click: true, curDone: !!fb })}</div>
-      ${key ? fillBox(key, P.mode, fb ? t3fb(fb, blankAnswer(key), true) + btns : '', ansForm(P, blankAnswer(key), { submit: '检查这一空' })) : '<div class="t-note-ok">这一段练完了。可以换个难度再来一遍，或者换一个论点。</div>'}
-      <div class="btn-row"><button class="btn btn-outline btn-sm" type="button" data-a="t3ppreset">重新开始</button><button class="btn btn-ghost btn-sm" type="button" data-a="t3ppexit">结束练习</button><span class="note-line">这里的练习不改变学习记录和复习安排</span></div></section>`;
+      <div class="t-fillpara" style="background:var(--paper)">${fillPara(A, P.keys, P.res, key, { mode: P.mode, click: true, curDone: !!fb, draft: P.draft })}</div>
+      ${key ? fillBox(key, P.mode, fb ? t3fb(fb, blankAnswer(key), true) + btns : '', inlForm(P, blankAnswer(key))) : '<div class="t-note-ok">这一段练完了。可以换个难度再来一遍，或者换一个论点。</div>'}
+      <div class="btn-row"><button class="btn btn-outline btn-sm" type="button" data-a="t3ppreset" data-confirm="再点一次，清空这一段">重新开始</button><button class="btn btn-ghost btn-sm" type="button" data-a="t3ppexit">结束练习</button><span class="note-line">这里的练习不改变学习记录和复习安排</span></div></section>`;
   } else {
     const html = weave(A.para, ranges, (rg, txt) => {
       if (rg.cls === 'sent') return `<span class="t-u">${esc(txt)}</span>`;
@@ -3479,7 +3559,7 @@ function t3Para(r) {
     });
     left = `<section class="panel"><span class="note-line">${esc(A.zh)}</span>
         <div class="t-para">${html}</div>
-        <div class="btn-row"><button class="btn btn-primary" type="button" data-a="t3ppstart" data-id="${A.id}">默写练习（不记录）</button><button class="btn btn-outline" type="button" data-a="t3paramask" data-id="${A.id}">${masked ? '取消遮挡' : '遮住标记处自测'}</button>${masked ? '<span class="note-line">点一处显示一处</span>' : ''}</div></section>`;
+        <div class="btn-row"><button class="btn btn-primary" type="button" data-a="t3ppstart" data-id="${A.id}">${ppFilled(A.id) ? `继续默写练习（已写 ${ppFilled(A.id)} 空）` : '默写练习（不记录）'}</button><button class="btn btn-outline" type="button" data-a="t3paramask" data-id="${A.id}">${masked ? '取消遮挡' : '遮住标记处自测'}</button>${masked ? '<span class="note-line">点一处显示一处</span>' : ''}</div></section>`;
   }
   const mk = c => P ? ' masked' : '';
   return {
@@ -3593,6 +3673,19 @@ function blankHint(key, mode) {
 function blankSpan(key, cls, text, note, click) {
   return `<span class="t-blank ${cls}${click ? ' tap' : ''}"${click ? ` data-a="t3blank" data-k="${key}" role="button" tabindex="0"` : ''}><span class="box">${text ? esc(text) : '&nbsp;'}</span><small>${note || '&nbsp;'}</small></span>`;
 }
+/* 正在写的空：文章里的空格本身就是输入框（v11），宽度按答案长度起步，写得长自动变宽、换行 */
+function inlBlank(key, hint, answer, draft) {
+  const w = Math.max(6, Math.min(18, Math.round(answer.length * 0.55)));
+  return `<span class="t-blank cur inl"><span class="box"><span class="t-inl" contenteditable="true" data-inl="${key}" role="textbox" aria-label="在这里写" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="done" style="--w:${w}em">${esc(draft || '')}</span></span><small>${hint || '&nbsp;'}</small></span>`;
+}
+/* 屏幕底部的操作条：检查、看提示、看答案（不用翻到文章下面） */
+function inlForm(h, answer, opts = {}) {
+  if (h.fb) return '';
+  return `<form data-form="t3ans" class="t-inlform" autocomplete="off">
+    ${h.hinted ? `<span class="t-hint">提示：<span class="en">${esc(firstLetters(answer))}</span></span>` : '<span class="note-line">写完按回车</span>'}
+    <div class="btn-row"><button class="btn btn-primary btn-sm" type="submit">检查这一空</button>${opts.noHint ? '' : `<button class="btn btn-ghost btn-sm" type="button" data-a="t3hint" ${h.hinted ? 'disabled' : ''}>看提示</button>`}<button class="btn btn-ghost btn-sm" type="button" data-a="t3reveal">看答案</button></div>
+  </form>`;
+}
 function fillPara(A, keys, res, curKey, opts) {
   const mode = opts.mode || 'both';
   const specs = [{ p: A.en, key: A.id + ':s', cls: keys.includes(A.id + ':s') ? 'blank' : 'sent' }]
@@ -3603,10 +3696,11 @@ function fillPara(A, keys, res, curKey, opts) {
     if (rg.cls === 'plain') return esc(txt);
     const a = res[rg.key], hint = blankHint(rg.key, mode), lock = opts.lock && opts.lock[rg.key];
     const click = opts.click && !lock && !(a && a.g === 'rem');
-    if (rg.key === curKey && !opts.curDone) return blankSpan(rg.key, 'cur', '', hint, false);
+    if (rg.key === curKey && !opts.curDone) return inlBlank(rg.key, hint, txt, (opts.draft || {})[rg.key]);
     if (!a) return blankSpan(rg.key, '', '', hint, click);
-    if (a.g === 'rem') return blankSpan(rg.key, a.tier === 'form' ? 'form' : 'ok', a.tier === 'form' ? a.input : '✓ ' + txt, a.tier === 'form' ? '形式不对 · 应为 ' + esc(txt) : '正确', false);
-    return blankSpan(rg.key, 'bad', '✕ ' + (a.input || '—'), (a.g === 'vag' ? '只错一点' : '写错') + ' · 应为 ' + esc(txt) + (click ? ' · 点这里再填' : ''), click);
+    const last = rg.key === curKey && opts.curDone ? ' last' : ''; // 刚检查的那一空
+    if (a.g === 'rem') return blankSpan(rg.key, (a.tier === 'form' ? 'form' : 'ok') + last, a.tier === 'form' ? a.input : '✓ ' + txt, a.tier === 'form' ? '形式不对 · 应为 ' + esc(txt) : '正确', false);
+    return blankSpan(rg.key, 'bad' + last, '✕ ' + (a.input || '—'), (a.g === 'vag' ? '只错一点' : '写错') + ' · 应为 ' + esc(txt) + (click ? ' · 点这里再填' : ''), click);
   });
 }
 /* 填空进度：done 里是已经结束的空，cur 是当前这一空 */
@@ -3617,7 +3711,7 @@ function feNext(E) {
 }
 function fillBox(key, mode, fbHTML, form) {
   const it = tget(key), hint = blankHint(key, mode);
-  return `<div class="qcard t-fillbox"><div class="qtype"><span class="tag ${key.startsWith('tt:') ? 'term' : it.kind === 'sent' ? 'core' : 'know'}">${key.startsWith('tt:') ? '话题词汇' : it.kind === 'sent' ? '论点句' : '展开表达 · ' + it.role}</span><span>${hint || '这一空不给提示，看段落语境'}</span></div>${fbHTML || form}</div>`;
+  return `<div class="qcard t-fillbox t-fillbar"><div class="qtype"><span class="tag ${key.startsWith('tt:') ? 'term' : it.kind === 'sent' ? 'core' : 'know'}">${key.startsWith('tt:') ? '话题词汇' : it.kind === 'sent' ? '论点句' : '展开表达 · ' + it.role}</span><span>${hint || '这一空不给提示，看段落语境'}</span></div>${fbHTML || form}</div>`;
 }
 const modeSeg = (act, cur) => `<div class="seg small" role="group" aria-label="提示难度">${FILL_MODES.map(([k, t]) => `<button type="button" data-a="${act}" data-v="${k}" aria-pressed="${cur === k}">${t}</button>`).join('')}</div>`;
 
@@ -3662,8 +3756,8 @@ function t3Learn() {
       ? `<div class="btn-row"><button class="btn btn-primary" type="button" data-a="t3next" data-enter>下一空</button></div>`
       : `<div class="btn-row"><button class="btn btn-primary" type="button" data-a="t3retry" data-enter>再填一次</button><button class="btn btn-ghost" type="button" data-a="t3skipblank">跳过这一空</button></div>`;
     return wrap(`<div class="section-head"><span class="warm">论点 ${A.n} · ${esc(A.short)} <span class="muted">（共 ${L.args.length} 段，第 ${F.ai + 1} 段）</span>　点任意一个空格都可以先填它</span><span class="note-line">已完成 ${doneN} / ${F.keys.length}</span></div>
-      <div class="t-fillpara">${fillPara(A, F.keys, F.res, key, { mode: F.mode, click: true, curDone: !!fb })}</div>
-      ${fillBox(key, F.mode, fb ? t3fb(fb, blankAnswer(key), true) + btns : '', ansForm(L, blankAnswer(key), { submit: '检查这一空', noHint: true }))}
+      <div class="t-fillpara">${fillPara(A, F.keys, F.res, key, { mode: F.mode, click: true, curDone: !!fb, draft: L.draft })}</div>
+      ${fillBox(key, F.mode, fb ? t3fb(fb, blankAnswer(key), true) + btns : '', inlForm(L, blankAnswer(key), { noHint: true }))}
       <div class="t-judge"><div class="ok"><b>正确</b><span>和范文写法一样（大小写、标点不管）</span></div><div class="form"><b>形式不对</b><span>关键词对，只差单复数、时态、-s / -ed / -ing 或 a / the，不算写错</span></div><div class="bad"><b>写错</b><span>可以再填一次，也可以跳过；第一次填的结果会记下来</span></div></div>
       <div class="btn-row"><button class="btn btn-ghost btn-sm" type="button" data-a="t3fillskip">结束范文填空</button></div>`);
   }
@@ -3886,8 +3980,8 @@ function t3RevArg(R, q, u) {
       title, crumb, focus: true,
       body: `<div class="session wide">${head}${done1}
         <div class="section-head"><span class="warm">${mode === 'both' ? '把这个论点的展开表达填回段落。空格下面有中文和原形，需要时自己变形' : '论点句也空出来。每空只给中文，不给原形，自己想出整个表达并写成合适的形式'}。点任意一个空格都可以先填它</span><span class="note-line">已填 ${doneN} / ${u.keys.length}</span></div>
-        <div class="t-fillpara">${fillPara(A, u.keys, u.ans, key, { mode, click: true, lock: u.done, curDone: !!fb })}</div>
-        ${fillBox(key, mode, fb ? t3fb(fb, blankAnswer(key)) + btns : '', ansForm(u, blankAnswer(key), { submit: '检查这一空' }))}
+        <div class="t-fillpara">${fillPara(A, u.keys, u.ans, key, { mode, click: true, lock: u.done, curDone: !!fb, draft: u.draft })}</div>
+        ${fillBox(key, mode, fb ? t3fb(fb, blankAnswer(key)) + btns : '', inlForm(u, blankAnswer(key)))}
         <div class="t-judge"><div class="ok"><b>正确 / 形式不对</b><span>都算记得，看了提示写对也算</span></div><div class="form"><b>只错一个词</b><span>预选模糊</span></div><div class="bad"><b>错很多 / 看答案</b><span>预选忘记，明天补练</span></div></div></div>`,
     };
   }
@@ -4145,19 +4239,50 @@ function t3PlanHTML() {
   html += `<div class="btn-row"><button class="btn btn-primary" type="button" data-a="t3startall">开始今日复习</button><span class="note-line">共 ${P.n + oldN} 条 · 从${P.mk.length ? '补练' : P.n ? '论点' : '第 1 组'}开始；每完成一个论点会显示它的结果，可以随时退出</span></div>`;
   return html;
 }
+/* ---------- 主菜：每天学几组、推荐哪个话题、自己换话题（v11） ---------- */
+const t3PerDay = () => Math.max(1, +(S.t3.set.newPerDay || 1));
+const t3TodayCombos = () => S.t3.combos.filter(c => dayKey(c.created) === dayKey()).length;
+const t3HasFresh = () => T.topics.some(tp => topicStats(tp).fresh > 0);
+// 推荐：还没学的论点最多的话题；今天刚学过的往后放
+function t3RecTopic() {
+  const today = new Set(S.t3.combos.filter(c => dayKey(c.created) === dayKey()).map(c => c.topic));
+  return T.topics.filter(tp => topicStats(tp).fresh > 0)
+    .sort((a, b) => (today.has(a.id) - today.has(b.id)) || (topicStats(b).fresh - topicStats(a).fresh))[0] || null;
+}
+/* 今天学这个：推荐的话题 + 换一个话题（首页和今日学习共用） */
+function t3NewCard(compact) {
+  const tp = t3RecTopic();
+  if (!tp) return `<p class="warm">${T.topics.length ? '所有话题的论点都学过了。可以导入新话题。' : '还没有主题表达。导入一个话题后，这里会推荐今天学哪 3 个论点。'}</p>
+    <div class="btn-row"><button class="btn btn-outline btn-sm" type="button" data-a="impopen" data-k="topic">导入话题</button></div>`;
+  const s = topicStats(tp), n = t3TodayCombos(), per = t3PerDay();
+  const done = n >= per;
+  return `<div class="t-newcard ${compact ? 'compact' : ''}">
+    ${done ? `<div class="t-newdone">${svg('check', 2.4)}<span>今天的主菜学完了（${n} 组）。想多学可以再来一组，或者去<button class="t-link-btn" type="button" data-go="sset">编排</button>里改成每天多学几组。</span></div>` : ''}
+    <div class="note-line">${done ? '再学一组：' : n ? `今天第 ${n + 1} / ${per} 组 · ` : ''}${esc(tp.theme)} / 主题表达</div>
+    <h3 class="t-newname">${esc(tp.name)}</h3>
+    ${tp.concepts.length ? `<p class="warm">${tp.concepts.map(esc).join(' · ')}</p>` : ''}
+    <p class="note-line">还有 ${s.fresh} 个论点没学 · 一次学 3 个，组成一篇作文的写作思路</p>
+    <div class="btn-row"><button class="btn ${done ? 'btn-outline' : 'btn-primary'}" type="button" data-go="tpick:${tp.id}">${done ? '再学一组' : '开始今日新学'}</button><button class="btn btn-outline" type="button" data-a="t3tpopen">换一个话题</button><button class="btn btn-ghost" type="button" data-go="ttopic:${tp.id}">查看话题</button></div>
+  </div>`;
+}
+/* 换一个话题：按大主题分组，写出还剩几个论点 */
+function topicPickerHTML() {
+  const rec = t3RecTopic();
+  const themes = [...new Set(T.topics.map(t => t.theme))];
+  const row = tp => { const s = topicStats(tp); return `<button class="t-tprow ${s.fresh ? '' : 'off'}" type="button" ${s.fresh ? `data-go="tpick:${tp.id}"` : 'disabled'}><span class="nm">${esc(tp.name)}${rec && rec.id === tp.id ? '<span class="tag">推荐</span>' : ''}</span><span class="ct">${s.fresh ? `还有 ${s.fresh} 个论点没学` : '都学过了'}</span>${s.fresh ? svg('chev') : ''}</button>`; };
+  return `<div class="s-scrim" data-a="t3tpclose"><div class="s-sheet t-tpsheet" role="dialog" aria-label="选一个话题" data-a="t3tpnoop">
+    <div class="s-sheet-h"><div><h3>选一个话题</h3><span class="note-line">选了就进入选论点，一次学 3 个</span></div><button class="icon-btn" type="button" data-a="t3tpclose" aria-label="关闭">✕</button></div>
+    <div class="t-tplist">${themes.map(th => `<div class="t-tpgroup"><span class="t-tpth">${esc(th)}</span>${T.topics.filter(t => t.theme === th).sort((a, b) => topicStats(b).fresh - topicStats(a).fresh).map(row).join('')}</div>`).join('')}</div>
+    <div class="btn-row"><button class="btn btn-ghost btn-sm" type="button" data-nav="topics">看全部话题 ›</button></div></div></div>`;
+}
 function t3TodayNew() {
   const L = S.t3.learn;
   if (L && L.step !== 'done') {
     const tp = T.topic.get(L.topic);
-    return `<div class="row" style="background:var(--paper)"><div class="body"><span class="title">「${esc(tp.name)}」新学进行中</span><span class="meta">${L.args.length} 个论点 · ${{ preview: '预览', write: '逐条默写', fill: '范文填空', terms: '话题词汇' }[L.step]}</span></div>
+    return `<div class="row" style="background:var(--paper)"><div class="body"><span class="title">「${esc(tp.name)}」新学进行中</span><span class="meta">${L.args.length} 个论点 · ${{ preview: '预览', write: '逐条默写', fill: '范文填空', fillchoose: '范文填空', terms: '话题词汇' }[L.step] || ''}</span></div>
       <div class="btn-row"><button class="btn btn-ghost btn-sm btn-danger" type="button" data-a="t3droplearn" data-confirm="确认放弃">放弃本次进度</button><button class="btn btn-primary" type="button" data-a="t3resume">继续新学</button></div></div>`;
   }
-  return `<div class="rows">${T.topics.map(tp => {
-    const s = topicStats(tp);
-    return `<div class="row white"><div class="body"><span class="title">${esc(tp.name)}</span><span class="meta"><span>${esc(tp.theme)}</span><span>${tp.args.length} 个论点 · 还没学 ${s.fresh} 个</span>${statusHTML(topicStatus(s))}</span></div>
-      <div class="btn-row"><button class="btn btn-outline btn-sm" type="button" data-go="ttopic:${tp.id}">查看</button>${s.fresh ? `<button class="btn btn-primary btn-sm" type="button" data-go="tpick:${tp.id}">选论点开始</button>` : ''}</div></div>`;
-  }).join('')}</div>
-  <p class="note-line">每次学一个话题里的 3 个论点（一篇作文的 3 个主体段）。</p>`;
+  return t3NewCard(true) + `<div class="t-newfoot"><span class="note-line">每天 ${t3PerDay()} 组 · <button class="t-link-btn" type="button" data-go="sset">改</button></span><button class="t-link-btn" type="button" data-nav="topics">看全部话题 ›</button></div>`;
 }
 
 /* ============================================================
@@ -4361,15 +4486,16 @@ function t3answer(input, revealed) {
     if (L.step === 'terms' && !L.tfirst[c.id + ':' + c.part]) L.tfirst[c.id + ':' + c.part] = ansOf(fb);
     if (fb.g !== 'rem' && fb.input) RR(c.id).wrongs.push({ t: Date.now(), input: fb.input, r: fb.g });
   }
-  if (c.pp) c.h.res[c.id] = fb;
+  if (c.pp) { c.h.res[c.id] = fb; save(); }
   if (c.arg) { c.h.ans[c.id] = fb; if (c.h.step === 'fill') { c.h.done[c.id] = true; c.h.cur = c.id; } }
   if (!c.prac) save();
   render();
 }
 function t3next() {
   const v = cur().v;
+  ui.focusInl = true;
   if (v === 'tlearn') { t3LearnNext(); return; }
-  if (v === 'tpara' && ui.t3pp) { const P = ui.t3pp, k = feKey(P); if (k) { P.done[k] = true; P.cur = k; } P.fb = null; P.hinted = false; feNext(P); render(); return; }
+  if (v === 'tpara' && ui.t3pp) { const P = ui.t3pp, k = feKey(P); if (k) { P.done[k] = true; P.cur = k; } P.fb = null; P.hinted = false; feNext(P); save(); ui.focusInl = true; render(); return; }
   if (v === 'tprac') { const p = ui.t3prac; p.i++; p.fb = null; p.hinted = false; if (p.i >= p.ids.length) { ui.t3prac = null; back(); toast('错题练习完成'); } else render(true); return; }
   const R = S.t3.rev, q = R.queue[R.i], u = R.u;
   if (q.k === 'arg') { t3ArgAdvance(u, q); save(); render(true); return; }
@@ -4381,6 +4507,9 @@ function t3click(a, el) {
   switch (a) {
     case 't3defmode': S.t3.set.defMode[el.dataset.k] = el.dataset.m; save(); render(); toast('以后导入的卡按这个默认值'); return true;
     case 't3view': ui.t3view = el.dataset.v; render(); return true;
+    case 't3tpopen': ui.t3tp = true; render(); return true;
+    case 't3tpclose': ui.t3tp = false; render(); return true;
+    case 't3tpnoop': return true;
     case 't3mask': ui.t3mask = el.dataset.v; render(); return true;
     case 't3unmask': el.classList.remove('masked'); el.removeAttribute('data-a'); return true;
     case 't3para': if (ui.t3pp) ppStart(id, ui.t3pp.mode, ui.t3pp.sent); replaceRoute({ v: 'tpara', id }); return true;
@@ -4408,7 +4537,7 @@ function t3click(a, el) {
       S.t3.learn = null; save(); render(); toast('已放弃本次新学进度'); return true;
     }
     case 't3lstep': { const L = S.t3.learn; L.step = 'write'; L.ai = 0; L.q = T.arg.get(L.args[0]).items.slice(); L.fb = null; save(); render(true); return true; }
-    case 't3hint': { const c = t3ctx(); c.h.hinted = true; if (!c.prac) save(); render(); return true; }
+    case 't3hint': { const c = t3ctx(); c.h.hinted = true; if (!c.prac || c.pp) save(); ui.focusInl = true; render(); return true; }
     case 't3reveal': t3answer('', true); return true;
     case 't3next': t3next(); return true;
     case 't3open': ui.t3open = ui.t3open || new Set(); ui.t3open.has(id) ? ui.t3open.delete(id) : ui.t3open.add(id); render(); return true;
@@ -4464,19 +4593,20 @@ function t3click(a, el) {
       const k = el.dataset.k, v = cur().v;
       if (v === 'tlearn') { const L = S.t3.learn, F = L.fill; delete F.done[k]; F.cur = k; L.fb = null; L.hinted = false; save(); }
       else if (v === 'trev') { const u = S.t3.rev.u; if (u.done[k]) { toast('这一空已经填过，结果页可以改评分'); return true; } u.cur = k; u.fb = null; u.hinted = false; save(); }
-      else if (ui.t3pp) { const P = ui.t3pp; delete P.done[k]; P.cur = k; P.fb = null; P.hinted = false; }
-      render(); return true;
+      else if (ui.t3pp) { const P = ui.t3pp; delete P.done[k]; P.cur = k; P.fb = null; P.hinted = false; save(); }
+      ui.focusInl = true; render(); return true;
     }
-    case 't3retry': { const c = t3ctx() || {}; const h = cur().v === 'tlearn' ? S.t3.learn : ui.t3pp; h.fb = null; h.hinted = false; if (cur().v === 'tlearn') save(); render(); return true; }
+    case 't3retry': { const c = t3ctx() || {}; const h = cur().v === 'tlearn' ? S.t3.learn : ui.t3pp; h.fb = null; h.hinted = false; save(); ui.focusInl = true; render(); return true; }
     case 't3skipblank': {
       if (cur().v === 'tlearn') { const L = S.t3.learn, F = L.fill, k = feKey(F); F.done[k] = true; F.cur = k; L.fb = null; L.hinted = false; t3FillAdvance(L); save(); }
-      else { const P = ui.t3pp, k = feKey(P); P.done[k] = true; P.cur = k; P.fb = null; P.hinted = false; feNext(P); }
-      render(true); return true;
+      else { const P = ui.t3pp, k = feKey(P); P.done[k] = true; P.cur = k; P.fb = null; P.hinted = false; feNext(P); save(); }
+      ui.focusInl = true; render(); return true;
     }
     case 't3ppstart': ppStart(id, (ui.t3ppPref || {}).mode, (ui.t3ppPref || {}).sent); render(); return true;
-    case 't3ppmode': { const P = ui.t3pp; ui.t3ppPref = { mode: el.dataset.v, sent: P.sent }; ppStart(P.arg, el.dataset.v, P.sent); render(); return true; }
-    case 't3ppsent': { const P = ui.t3pp; ui.t3ppPref = { mode: P.mode, sent: !P.sent }; ppStart(P.arg, P.mode, !P.sent); render(); return true; }
-    case 't3ppreset': { const P = ui.t3pp; ppStart(P.arg, P.mode, P.sent); render(); return true; }
+    // 换提示难度、论点句挖不挖空：写过的都留着，只换提示
+    case 't3ppmode': { const P = ui.t3pp; P.mode = el.dataset.v; ui.t3ppPref = { mode: P.mode, sent: P.sent }; save(); ui.focusInl = true; render(); return true; }
+    case 't3ppsent': { const P = ui.t3pp; P.sent = !P.sent; P.keys = ppKeys(T.arg.get(P.arg), P.sent); if (P.cur && !P.keys.includes(P.cur)) { P.cur = null; P.fb = null; } ui.t3ppPref = { mode: P.mode, sent: P.sent }; save(); render(); return true; }
+    case 't3ppreset': { const P = ui.t3pp; Object.assign(P, { res: {}, done: {}, draft: {}, cur: null, fb: null, hinted: false }); save(); render(); return true; }
     case 't3ppexit': ui.t3pp = null; render(); return true;
     case 't3fav': { S.t3.fav[id] = !S.t3.fav[id]; if (!S.t3.fav[id]) delete S.t3.fav[id]; save(); render(); toast(S.t3.fav[id] ? '已收藏' : '已取消收藏'); return true; }
     case 't3set': { const k = el.dataset.k; S.t3.set[k] = !S.t3.set[k]; save(); render(); return true; }
@@ -4485,7 +4615,12 @@ function t3click(a, el) {
   return false;
 }
 function t3submit(kind, f) {
-  if (kind === 't3ans') { const inp = f.querySelector('[name="answer"]'); if (!inp.value.trim()) { inp.focus(); return; } t3answer(inp.value, false); return; }
+  if (kind === 't3ans') {
+    const inp = f.querySelector('[name="answer"]'), inl = document.querySelector('#view [data-inl]');
+    const val = inp ? inp.value : inl ? inl.innerText.replace(/\s+/g, ' ').trim() : '';
+    if (!val.trim()) { const x = inp || inl; if (x) x.focus(); return; }
+    t3answer(val, false); return;
+  }
   if (kind === 't3copy') {
     const c = t3ctx(), inp = f.querySelector('[name="answer"]');
     if (!diff(inp.value, c.ans).ok && !formOnly(inp.value, c.ans)) { toast('再对照一下正确答案'); inp.focus(); return; }
@@ -5980,13 +6115,13 @@ function vTodaySide() {
   const oldQ = dueQueue(), oldN = oldQ.reduce((a, g) => a + g.ids.length, 0);
   const reviewDone = !P.n && !S.t3.rev && !pend.length && !sdue.length && !D.rev && !oldN;
   const tl = S.t3.learn, topicBusy = tl && tl.step !== 'done';
-  const topicDone = !topicBusy && S.t3.combos.some(c => dayKey(c.created) === dayKey());
+  const topicN = t3TodayCombos(), topicDone = !topicBusy && (topicN >= t3PerDay() || !t3HasFresh());
   const sideDone = D.today.done || (!ids.length && !D.learn);
   const sp = spActive(), paused = spPaused() && !topicBusy && !D.learn;
   const pz = [false, paused, paused];
   const steps = [reviewDone, topicDone || paused, sideDone || paused];
   const doneN = steps.filter((x, i) => x && !pz[i]).length, curStep = steps.findIndex(x => !x), totN = paused ? 1 : 3;
-  const mins = Math.round((P.n + sdue.length + oldN) * 0.9 + (topicDone ? 0 : 22) + (sideDone ? 0 : ids.length * 1.3));
+  const mins = Math.round((P.n + sdue.length + oldN) * 0.9 + (topicDone ? 0 : 22 * Math.max(1, t3PerDay() - topicN)) + (sideDone ? 0 : ids.length * 1.3));
   const tlRow = (i, title, sub, right, inner = '') => `<div class="s-tl ${steps[i] ? 'done' : ''} ${pz[i] ? 'paused' : ''}"><div class="rail"><span class="s-dot ${pz[i] ? 'paused' : steps[i] ? 'done' : (i === curStep ? 'cur' : '')}">${pz[i] ? '–' : steps[i] ? svg('check', 2.4) : i + 1}</span><span class="line"></span></div>
     <div class="body"><div class="title"><h3>${title}</h3><span class="note-line">${sub}</span><span class="r">${right}</span></div>${inner}</div></div>`;
   const doneTag = '<span class="note-line" style="color:var(--sage-deep)">已完成</span>';
@@ -6033,11 +6168,11 @@ function vTodaySide() {
       ${oldNew}
       <div class="s-tls">
       ${tlRow(0, sp ? '冲刺复习' : '今日复习', reviewDone ? '' : sp ? '今天分到的，加上本来今天到期的' : '主题表达 + 配菜，按到期时间排', reviewDone ? doneTag : '', revInner)}
-      ${paused ? tlRow(1, '主菜 · 主题表达', '冲刺期间暂停', '', spPausedCard('考前不学新的话题，把学过的复习牢。')) : tlRow(1, '主菜 · 主题表达', '一次一个写作组合（3 个论点，约 12 条）', topicDone ? doneTag : '', `<div class="s-card s-main">${t3TodayNew()}</div>`)}
+      ${paused ? tlRow(1, '主菜 · 主题表达', '冲刺期间暂停', '', spPausedCard('考前不学新的话题，把学过的复习牢。')) : tlRow(1, '主菜 · 主题表达', `今天 ${Math.min(topicN, t3PerDay())} / ${t3PerDay()} 组 · 一组 3 个论点`, topicDone ? doneTag : '', `<div class="s-card s-main">${t3TodayNew()}</div>`)}
       ${paused ? tlRow(2, '配菜', '冲刺期间暂停', '', spPausedCard('功能表达、我的笔记也先不学新的。')) : tlRow(2, sideTitle, ids.length ? `${ids.length} 条 · 约 ${Math.max(2, Math.round(ids.length * 1.3))} 分钟` : '', sideRight, sideInner)}
       </div>
       ${ck ? `<div class="btn-row"><button class="btn btn-primary" type="button" data-a="checkin">完成今天的学习并打卡</button></div>` : ''}
-    </div>`,
+    </div>${ui.t3tp ? topicPickerHTML() : ''}`,
   };
 }
 
@@ -6049,9 +6184,9 @@ function vSideSet() {
   const chk = (a, k, on) => `<button class="s-check" type="button" data-a="${a}" data-k="${k}" aria-pressed="${on}" aria-label="参加">${on ? svg('check', 2.6) : ''}</button>`;
   const chips = (list, onMap, a, nameOf, iconOf, extra) => list.map((k, i) => `<span class="s-ochip ${onMap[k] ? '' : 'off'}"><button class="mv" type="button" data-a="${a}move" data-k="${k}" data-d="-1" aria-label="往前">‹</button>${chk(a + 'on', k, onMap[k])}${iconOf(k)}${nameOf(k)}${extra ? `<small>${extra(k)}</small>` : ''}<button class="mv" type="button" data-a="${a}move" data-k="${k}" data-d="1" aria-label="往后">›</button></span>${i < list.length - 1 ? '<span class="muted">→</span>' : '<span class="muted">→ 回到第一个</span>'}`).join('');
   const counts = rot
-    ? `<div class="s-krow"><span></span>${sdIco('topic')}<b>主题表达</b><small>每天一个写作组合（3 个论点）</small><span></span></div>
+    ? `<div class="s-krow"><span></span>${sdIco('topic')}<b>主题表达</b><small>每天几个写作组合（一组 3 个论点）</small><span>${stepper('sdtper', t3PerDay())}<span class="unit">组</span></span></div>
        <div class="s-krow"><span></span>${sdIco('today')}<b>轮到的那一类</b><small>每天只学这一类，整组学</small><span>${stepper('sdg', D.g.rot, 'rot')}<span class="unit">组</span></span></div>`
-    : `<div class="s-krow"><span></span>${sdIco('topic')}<b>主题表达</b><small>每天一个写作组合（3 个论点）</small><span></span></div>
+    : `<div class="s-krow"><span></span>${sdIco('topic')}<b>主题表达</b><small>每天几个写作组合（一组 3 个论点）</small><span>${stepper('sdtper', t3PerDay())}<span class="unit">组</span></span></div>
        ${D.order.map(c => `<div class="s-krow ${D.on[c] ? '' : 'off'}">${chk('sdcaton', c, D.on[c])}${sdIco(SD_CAT[c].icon)}<b>${SD_CAT[c].name}</b><small>每天都有</small><span>${stepper('sdg', D.g[c], c)}<span class="unit">组</span></span></div>`).join('')}`;
   const wk = sdWeek(), first = wk[0];
   const tomorrowN = first ? Object.values(first.n).reduce((a, b) => a + b, 0) : 0;
@@ -6405,6 +6540,7 @@ function sideClick(a, el) {
   switch (a) {
     case 'sdmode': D.mode = v; reList(); break;
     case 'sdg': D.g[k] = Math.max(1, Math.min(4, D.g[k] + +el.dataset.d)); reList(); break;
+    case 'sdtper': S.t3.set.newPerDay = Math.max(1, Math.min(6, t3PerDay() + +el.dataset.d)); break;
     case 'sdcaton': D.on[k] = !D.on[k]; reList(); break;
     case 'sdcatmove': case 'sdnkmove': { const o = a === 'sdcatmove' ? D.order : D.notes.order, i = o.indexOf(k), j = i + +el.dataset.d; if (j >= 0 && j < o.length) { [o[i], o[j]] = [o[j], o[i]]; reList(); } break; }
     case 'sdnkon': D.notes.on[k] = !D.notes.on[k]; reList(); break;
@@ -7127,6 +7263,7 @@ document.addEventListener('click', e => {
     setTimeout(() => { if (el.isConnected) { el.classList.remove('armed'); el.textContent = el.dataset.label; } }, 3500);
     return;
   }
+  if (el.dataset.nav || el.dataset.go) ui.t3tp = false; // 换话题的弹窗：去别的页面就收起
   if (el.dataset.nav) {
     const v = el.dataset.nav;
     if (v === 'today') { ui.todaySel = ui.todaySel || null; }
@@ -7323,6 +7460,32 @@ document.addEventListener('submit', e => {
     ui.impText = ''; ui.impTitle = '';
     if (!ok) { const dup = [runImport.sameTopics ? `${runImport.sameTopics} 个话题` : '', createNoteSet.skipped ? `${createNoteSet.skipped} 条笔记 / 功能表达` : ''].filter(Boolean).join('、'); $('#form-msg').innerHTML = dup ? `这些内容（${dup}）都已经导入过了，没有新内容。` : '没有识别到内容。每行写一条，英文在前、中文在后；主题表达用“# 话题：……”开头。<button class="t-link-btn" type="button" data-go="impguide">看导入格式说明 ›</button>'; return; }
   }
+});
+
+/* 文章里的空格：写的内容随时记下（切换难度、看提示、换论点都不丢）；回车 = 检查 / 下一空；粘贴只要文字 */
+let inlSaveT = 0;
+document.addEventListener('input', e => {
+  const el = e.target;
+  if (!el.dataset || !el.dataset.inl) return;
+  const c = t3ctx();
+  if (!c || !c.h) return;
+  (c.h.draft || (c.h.draft = {}))[el.dataset.inl] = el.innerText.replace(/\n/g, ' ');
+  clearTimeout(inlSaveT); inlSaveT = setTimeout(save, 400);
+  inlKeepVisible(el);
+});
+document.addEventListener('keydown', e => {
+  const el = e.target;
+  if (!el.dataset || !el.dataset.inl || e.key !== 'Enter' || e.isComposing) return;
+  e.preventDefault(); e.stopPropagation();
+  const f = $('#view form[data-form="t3ans"]');
+  if (f) { if (f.requestSubmit) f.requestSubmit(); else f.querySelector('[type="submit"]').click(); }
+}, true);
+document.addEventListener('paste', e => {
+  const el = e.target.closest && e.target.closest('[data-inl]');
+  if (!el) return;
+  e.preventDefault();
+  const text = (e.clipboardData || window.clipboardData).getData('text').replace(/\s+/g, ' ');
+  document.execCommand('insertText', false, text);
 });
 
 let importSource = '';
