@@ -1,0 +1,30 @@
+{
+  "name": "雅思写作表达",
+  "short_name": "写作表达",
+  "description": "雅思写作词汇与表达：主题表达、功能表达、写作笔记的新学、默写与间隔复习。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#EEEAE2",
+  "theme_color": "#EEEAE2",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
