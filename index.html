@@ -1673,7 +1673,7 @@ const TOPICS3 = (window.__DEMO && window.__DEMO.topics) || [];
 
 const IMPORT_GUIDE = "# 导入规范（v9）\n\nv9 不带任何预设内容，表达库里的东西都由你自己导入。一共三种内容：**写作笔记**（表达卡、句型卡、语法卡）、**功能表达**、**主题表达**（话题，含话题词汇）。这份说明写清楚每一种要写什么、怎么写，照着写就能被准确认出来。\n\n## 一、怎么导入\n\n1. 用任何文字编辑器写（备忘录、Typora、Obsidian、记事本、Word 另存为纯文本都可以），保存成 **.md** 或 **.txt** 文件，编码用 **UTF-8**（大多数编辑器默认就是）。\n2. 在 App 里打开“主题表达”“功能表达”或“我的写作笔记”页右上角的“导入”，选“导入 .md / .txt 文件”；也可以直接把文字粘贴到输入框里。\n3. 点“整理”，先进**确认页**：每一条认成了什么、有没有问题都会列出来，可以直接改。确认后才进入学习。\n\n建议**每种内容一个文件**：`写作笔记.md`、`功能表达.md`、`主题表达.md`（可以按话题分成多个文件）。三种也可以写在同一个文件里，App 会分开认，确认页按三个标签分别确认。\n\n导入页、本页最上面可以下载三份**模板**（template-topics.md、template-functions.md、template-notes.md），模板本身就能直接导入成功，照着改最省事。\n\n## 二、通用写法（三种都一样）\n\n- **一行一条**：英文在前，中文在后，中间空一格。例：`have a profound impact on 对……产生深远影响`\n- **行首的 `- ` 或 `1.` 可写可不写**，缩进也可有可无，只是为了自己看着清楚。\n- **补充内容写在这一条的下一行**，格式 `标签：内容`。中文冒号“：”、英文冒号“:”都可以。写作笔记和功能表达里，同一个标签写两行会合在一起。\n- **标题用 `#`**，`#` 后面要空一格。全角的“＃”也能认。\n- **英文部分不要用中文标点**。App 从第一个中文字符或中文标点（，：；（）开始算中文，英文里夹了中文标点会被切开。英文里的括号、逗号请用半角。\n- **学习方式**：行末写【记忆】【资料】【暂缓】就按写的来；写在 `#` 标题后面，整组都按它；都不写就用“复习设置 → 导入时的默认学习方式”。\n  - 记忆：进新学和复习；资料：只查阅；暂缓：先放着。\n- **说明文字**：用 `\u003c!--` 和 `-->` 包起来的内容导入时会忽略（模板最上面的说明就是这样写的）。单独一行的 `---` 分隔线、加粗用的 `**` 也会忽略。\n- **重复导入不会重复**：同一类型、英文一样的卡，第二次导入会跳过，确认页会告诉你跳过了哪些。所以可以一直往同一个文件里加内容，每次整份重新导入。\n\n## 三、写作笔记\n\n### 三种卡怎么认\n\n| 卡片 | 怎么写 | App 怎么认 |\n|---|---|---|\n| 表达卡 | `英文 中文` | 普通的一行 |\n| 句型卡 | `句型 中文` | 英文里有 `...`、`…`、`sb`、`sth`、`___` 或 `[ ]` |\n| 语法卡 | `❌ 错误写法 → ✅ 正确写法 中文说明` | 有 ❌ / → / ✅；也可以写 `错误：… 正确：…` |\n\n认错了类型可以在确认页改（每行最前面的“表达 / 句型 / 语法”）。\n\n### 分组\n\n- `# 标题` 下面的卡是一组，组名就是标题，新学和复习都按组来。\n- 同一个标题下**至少 2 张同类卡**才成一组；只有 1 张的放进“独立卡片”。\n- 一个标题下混了几种卡，会按类型分成几组（同一个组名）。\n\n### 每种卡能写的标签\n\n| 卡片 | 必填 | 选填标签 |\n|---|---|---|\n| 表达卡 | 英文 + 中文 | 例句、搭配、场景、常见错误 |\n| 句型卡 | 句型 + 中文 | 例句、可替换、场景、常见错误 |\n| 语法卡 | 错误 → 正确 | 规则、例句、限制（中文说明写在正确写法后面） |\n\n```\n# 强调深远影响\n- have a profound impact on 对……产生深远影响\n  - 例句：Social media has had a profound impact on the way young people communicate.\n  - 搭配：have a profound / significant / lasting impact on sth\n  - 场景：强调影响深远且持久，适合主体段的结果句\n  - 常见错误：不写 have a profound impact to\n- play a pivotal role in 在……中起关键作用\n\n# 引出原因的句型\n- One reason for this is that ... 其中一个原因是……\n  - 可替换：this 可换成具体现象\n- This is largely due to the fact that ... 这在很大程度上是因为……\n\n# 我的语法错误\n- ❌ The number of cars are increasing. → ✅ The number of cars is increasing. 主语是 the number，谓语用单数\n  - 规则：the number of + 复数名词作主语时，谓语用单数\n  - 限制：a number of + 复数名词，谓语用复数\n```\n\n## 四、功能表达\n\n- 每个写作功能一个标题，**必须写成 `# 功能：功能名`**（例如 `# 功能：表达观点`）。没有“功能：”的标题会被当成写作笔记。\n- 标题下面一行一条：英文 + 中文。\n- 同名的功能再导入会并到一起，在功能表达页一起做近义比较。\n- 功能表达默认是“资料”；要背的条目在行末写【记忆】，整组都背就写在标题后面。\n\n| 必填 | 选填标签 |\n|---|---|\n| 英文 + 中文 | 后面接（句法结构）、语气、区别（进近义比较表）、例句、常见错误 |\n\n```\n# 功能：表达观点\n- I firmly believe that ... 我坚信……【记忆】\n  - 后面接：+ 完整句子\n  - 语气：立场鲜明，比较正式\n  - 区别：比 In my view 更坚定，全文只用一次\n  - 例句：I firmly believe that schools should teach practical life skills.\n  - 常见错误：不写 I firmly believe in that ...\n- From my perspective, ... 在我看来……\n```\n\n## 五、主题表达（话题）\n\n### 结构\n\n```\n# 话题：话题名\n大主题：工作\n关键概念：远程办公、通勤、工作效率\n\n## 立场：支持 | 这一边的核心想法\n### 论点：短名\n- 论点句英文 论点句中文\n- 解释：展开表达英文 中文\n- 结果：展开表达英文 中文\n- 举例：展开表达英文 中文\n范文：整段范文……\n\n### 论点：短名\n……\n\n## 立场：反对 | 另一边的核心想法\n### 论点：短名\n……\n\n## 话题词汇\n- 词汇英文 中文\n```\n\n- `# 话题：` 只能用**一个 #**；`## 立场：`、`### 论点：` 分别用两个、三个 #。\n- 立场名和核心想法之间用 `|` 隔开（也可以用全角空格或两个空格）。\n- 论点下面**第一行**是论点句；之后每条展开表达用这几个开头：**解释：结果：举例：原因：对比：让步：补充：影响：**\n- **范文**写在每个论点的最后，以 `范文：` 开头。可以写在同一行，也可以换行接着写；范文后面直到下一个 `###` 或 `##` 之前，不是 `- ` 开头的行都算范文。\n\n### 必须写的（少了不能导入）\n\n1. 新话题**至少 2 个立场**（选论点时要两边搭配）。\n2. 每个论点有**论点句**、**至少一条展开表达**、**范文**。\n3. 论点句和每条展开表达都要**原样出现在范文里**（不分大小写）。展开表达在范文里写法不一样（改了时态、单复数）时，在它下面加一行 `范文里写成：范文里的写法`。\n\n确认页会按行号告诉你哪里不满足，改完原文再导入。\n\n### 选填标签\n\n| 写在哪一行下面 | 标签 | 写法 |\n|---|---|---|\n| 话题（# 话题 下面） | 大主题 | 话题列表按大主题分组；不写放在“我导入的话题” |\n| | 关键概念 | 用顿号“、”隔开 |\n| 论点句 | 可替换 | 论点句里能换的位置，用 `/` 隔开 |\n| | 换个话题 | 把这个句式套到别的话题的一句 |\n| 展开表达 | 原形 | 词典里的原形，如 `spend time doing sth` |\n| | 引导句 | 范文里引出它的半句，如 `This is because they …` |\n| | 提醒 | 用法提醒 |\n| | 也可以说 | 同义替换，用 `/` 隔开 |\n| | 范文里写成 | 范文里的实际写法 |\n| | 搭配 | 常用搭配，可以写多行 |\n| | 拆分 | `词 词性 \\| 词 词性`，如 `spend 动词 \\| less time 名词短语` |\n| 话题词汇 | 范畴 | 如 伦理、问题、交通方式 |\n| | 词性 | 如 n. 不可数 |\n| | 例句 | `英文例句 / 中文翻译` |\n| | 动词搭配 | `英文 中文`，可以写多行 |\n| | 这样写 / 不这样写 | 用 `/` 隔开 |\n\n### 学习方式\n\n- 论点什么时候背，在 App 里“选论点”时决定，不用在文件里写。\n- 【记忆】【资料】【暂缓】只对话题词汇有用，不写就是“资料”（可在复习设置里改默认）。\n\n### 补充已有的话题\n\n同名话题再导入一次会**补进去**：新的论点接在后面；已有的论点（短名或论点句一样）和话题词汇跳过；学习进度不变。补充时不要求两个立场。\n\n## 六、导入以后\n\n- **确认页**：每条都能改文字、类型、分组、学习方式，也能删除；能先“看详情页”看导入后的样子，用“编辑”改每一块。没认出来的行在最上面，每行选“当成表达卡 / 当备注 / 不要”，都处理完才能确认。\n- **导入历史**（左侧“我的”下面）：每次导入留一条，点开能看到这次导入了什么。\n- **备份**：数据只存在这台设备的浏览器里。建议把 App 添加到主屏幕使用，并时常在“复习设置 → 数据”里导出备份。原始的 .md 文件也请自己留好。\n\n## 七、没认出来怎么办\n\n| 现象 | 原因 | 改法 |\n|---|---|---|\n| 一行变成“没认出来” | 这一行没有英文，或者标签名不在上面的表里 | 改成 `英文 中文`，或用表里的标签名 |\n| 中文跑到了英文里 / 英文被截断 | 英文部分用了中文标点 | 英文里的标点改成半角 |\n| 表达被认成句型卡 | 英文里有 `...` / `sb` / `sth` | 确认页把类型改回“表达” |\n| 功能表达被当成笔记 | 标题少了“功能：” | 标题写成 `# 功能：功能名` |\n| 论点句 / 展开表达“在范文里找不到” | 范文里的写法和这一行不完全一样 | 改成一样，或加 `范文里写成：` |\n| “新话题至少要两个立场” | 只写了一个 `## 立场：` | 补另一边的立场和论点 |\n| 补充标签挂错了地方 | 标签必须写在它所属那一行的**正下方** | 把标签行挪到对应的卡 / 表达下面 |\n\n## 附：全部标签速查\n\n| 用在 | 标签（括号里是也能认的别名） |\n|---|---|\n| 表达卡 / 句型卡 / 语法卡 | 例句（例子、示例、示例句、正确例句、example）、搭配（常用搭配）、场景（使用场景、适用场景、用法、使用提醒）、常见错误（易错、易错点、个人错误）、可替换（可替换位置、替换）、规则（语法规则）、限制（使用限制） |\n| 功能表达 | 后面接（句法、句法结构）、语气（语气和边界）、区别（近义区别）、例句、常见错误 |\n| 话题 | 大主题、关键概念 |\n| 论点句 | 可替换、换个话题 |\n| 展开表达开头 | 解释、结果、举例、原因、对比、让步、补充、影响 |\n| 展开表达下面 | 原形、引导句、提醒、也可以说、范文里写成、搭配、拆分 |\n| 话题词汇 | 范畴、词性、例句、动词搭配、这样写、不这样写 |\n| 学习方式 | 【记忆】【资料】【暂缓】（方括号 [记忆] 也可以） |\n";
 const IMPORT_TPL = {"topic": "\u003c!--\n主题表达导入模板（v9）\n层级：# 话题 → ## 立场 → ### 论点 → 论点句、展开表达、范文；最后 ## 话题词汇。\n\n必须写的（少了不能导入，确认页会告诉你哪一行）：\n- 新话题至少 2 个立场（选论点时要两边搭配）。\n- 每个论点：论点下面第一行是论点句（英文 + 中文）；至少一条展开表达；一段范文。\n- 论点句、每条展开表达都要原样出现在范文里（不分大小写）。\n  展开表达在范文里写法不一样时（比如改了时态、复数），在它下面加一行“范文里写成：……”。\n\n展开表达用这几个开头：解释： 结果： 举例： 原因： 对比： 让步： 补充： 影响：\n\n选填标签（写在对应那一行的下面）：\n- 话题下面：大主题： 关键概念：（用顿号隔开）\n- 论点句下面：可替换：（论点句里能换的位置，用 / 隔开）  换个话题：（套到别的话题的一句）\n- 展开表达下面：原形： 引导句： 提醒： 也可以说：（用 / 隔开） 范文里写成： 搭配： 拆分：（词 词性 | 词 词性）\n- 话题词汇下面：范畴： 词性： 例句：（英文 / 中文） 动词搭配：（英文 中文） 这样写： 不这样写：（用 / 隔开）\n\n学习方式：论点什么时候背，在 App 里“选论点”时决定；【记忆】【资料】【暂缓】只对话题词汇有用，不写就是“资料”。\n同名话题再导入一次会补进去：新的论点接在后面，已有的论点、词汇跳过，学习进度不变。\n这种说明段落（注释）导入时会自动忽略。把下面的示例换成你自己的内容。\n-->\n\n# 话题：远程办公\n大主题：工作\n关键概念：远程办公、通勤、工作效率、团队合作\n\n## 立场：支持 | 远程办公对员工和城市都有好处\n\n### 论点：通勤\n- Working from home saves employees hours of commuting every week. 在家办公每周为员工节省好几个小时的通勤时间\n  - 可替换：Working from home / employees / commuting\n  - 换个话题：Online shopping saves consumers hours of travelling every month.\n- 解释：spend less time stuck in traffic 堵在路上的时间更少\n  - 原形：spend time doing sth\n  - 引导句：This is because they …\n  - 提醒：spend time 后面接 doing，不接 to do\n  - 也可以说：avoid the daily rush hour / skip the long journey to work\n  - 搭配：spend time / money / energy doing sth\n  - 拆分：spend 动词 | less time 名词短语 | stuck in traffic 被困在车流里\n- 结果：achieve a better work-life balance 实现更好的工作与生活平衡\n- 举例：parents with young children 带小孩的父母\n范文：Working from home saves employees hours of commuting every week. This is because they spend less time stuck in traffic and more time on meaningful tasks. As a result, many of them achieve a better work-life balance. For example, parents with young children can take their children to school and still start work on time.\n\n### 论点：效率\n- Many employees are more productive in a quiet home environment. 很多员工在安静的家里效率更高\n- 解释：fewer interruptions from colleagues 来自同事的打扰更少\n- 结果：complete tasks efficiently 高效地完成任务\n  - 范文里写成：complete tasks more efficiently\n范文：Many employees are more productive in a quiet home environment. They face fewer interruptions from colleagues, so they can focus on difficult work for longer. Consequently, they often complete tasks more efficiently than they would in a busy office.\n\n## 立场：反对 | 远程办公会削弱团队合作和员工的归属感\n\n### 论点：沟通\n- Remote work can weaken communication within a team. 远程办公会削弱团队内部的沟通\n- 解释：lack face-to-face contact 缺少面对面的交流\n- 结果：lead to misunderstandings 导致误解\n- 举例：new employees 新员工\n范文：Remote work can weaken communication within a team. When colleagues lack face-to-face contact, small problems are not discussed in time. This can easily lead to misunderstandings and delays. For example, new employees may find it hard to ask questions and learn from experienced staff.\n\n### 论点：孤独\n- Working alone at home can make people feel isolated. 一个人在家工作会让人感到孤立\n- 解释：miss out on social interaction 错过与人交往的机会\n- 结果：harm their mental health 损害心理健康\n范文：Working alone at home can make people feel isolated. Without an office, they miss out on social interaction with their colleagues. Over time, this may harm their mental health and reduce their motivation.\n\n## 话题词汇\n- remote work 远程办公【记忆】\n  - 范畴：工作方式\n  - 词性：n. 不可数\n  - 例句：Remote work has become common since 2020. / 2020 年以来远程办公变得很普遍。\n  - 动词搭配：switch to remote work 改为远程办公\n  - 这样写：remote work / working from home\n  - 不这样写：remote works\n- work-life balance 工作与生活的平衡\n  - 范畴：生活质量\n  - 词性：n.\n  - 例句：Flexible hours help employees achieve a better work-life balance.\n- productivity 生产效率\n  - 范畴：工作表现\n  - 词性：n. 不可数\n", "fn": "\u003c!--\n功能表达导入模板（v9）\n- 每个写作功能一个标题，必须写成“# 功能：功能名”，例如 # 功能：表达观点。\n  同名的功能再导入会并到一起，在功能表达页里一起做近义比较。\n- 标题下面一行一条：英文在前，中文在后，中间空一格。\n- 补充内容写在下一行“标签：内容”：\n    后面接：句法结构（+ 完整句子 / + 名词）\n    语气：正式程度、立场强弱\n    区别：和同功能其他表达有什么不同（会出现在近义比较表里）\n    例句：一句完整的例句\n    常见错误：容易写错的地方\n- 功能表达默认是“资料”（只查阅，不进新学和复习）；要背的条目在行末写【记忆】，整组都背就写在标题后面。\n- 这种说明段落（注释）导入时会自动忽略。把下面的示例换成你自己的内容。\n-->\n\n# 功能：表达观点\n- I firmly believe that ... 我坚信……【记忆】\n  - 后面接：+ 完整句子\n  - 语气：立场鲜明，比较正式\n  - 区别：比 In my view 更坚定，全文只用一次\n  - 例句：I firmly believe that schools should teach practical life skills.\n  - 常见错误：不写 I firmly believe in that ...\n- From my perspective, ... 在我看来……\n  - 后面接：+ 完整句子\n  - 语气：中性，稍微客观一些\n  - 区别：比 I think 正式，适合开头段\n  - 例句：From my perspective, the benefits of online learning outweigh its drawbacks.\n\n# 功能：原因与解释\n- Owing to the fact that ... 由于……\n  - 后面接：+ 完整句子\n  - 语气：正式\n  - 区别：比 because 正式，句子较长时用\n  - 例句：Owing to the fact that housing is expensive, many young people choose to rent.\n- The root cause of this is ... 根本原因是……\n  - 后面接：+ 名词 / that 从句\n  - 区别：强调最深层的那个原因\n  - 例句：The root cause of this is a lack of affordable housing.\n", "notes": "\u003c!--\n写作笔记导入模板（v9）\n- 一行一张卡：英文在前，中文在后，中间空一格。行首的“- ”可写可不写。\n- 卡的类型自动认：\n    表达卡：普通英文 + 中文\n    句型卡：英文里有 ... 或 … 或 sb / sth（例：One reason for this is that ...）\n    语法卡：❌ 错误写法 → ✅ 正确写法 中文说明\n- 补充内容写在卡的下一行，格式“标签：内容”（前面缩进两格，中英文冒号都可以）。\n- “# 标题”下面的卡是一组；同一个标题下至少 2 张同类卡才成一组，只有 1 张的会单独放。\n- 学习方式：行末写【记忆】【资料】【暂缓】；写在标题后面整组都按它；不写按“复习设置”里的默认值。\n- 这种说明段落（注释）导入时会自动忽略，可以删掉，也可以留着。\n- 把下面的示例换成你自己的内容。\n-->\n\n# 强调深远影响\n- have a profound impact on 对……产生深远影响\n  - 例句：Social media has had a profound impact on the way young people communicate.\n  - 搭配：have a profound / significant / lasting impact on sth\n  - 场景：强调影响深远且持久，比 affect 更正式，适合主体段的结果句\n  - 常见错误：impact 后用 on，不写 have a profound impact to\n- play a pivotal role in 在……中起关键作用\n  - 例句：Teachers play a pivotal role in shaping students' values.\n  - 搭配：play a key / crucial / pivotal role in doing sth\n  - 场景：强调“关键作用”，in 后面接名词或动名词\n\n\u003c!-- 句型卡：英文里有 ... 就是句型卡。可以多写一个“可替换：”，说明哪些位置能换 -->\n# 引出原因的句型\n- One reason for this is that ... 其中一个原因是……\n  - 可替换：this 可换成具体现象；that 后面接完整的原因句\n  - 例句：One reason for this is that housing in big cities is expensive.\n  - 场景：主体段列举多个原因时，引出其中一个\n  - 常见错误：不写 One reason is because ...\n- This is largely due to the fact that ... 这在很大程度上是因为……\n  - 可替换：largely 可换成 partly / mainly\n  - 例句：This is largely due to the fact that more people now work from home.\n\n\u003c!-- 语法卡：❌ 错 → ✅ 对，后面跟中文说明。补充用“规则：”“例句：”“限制：” -->\n# 我的语法错误\n- ❌ The number of cars are increasing. → ✅ The number of cars is increasing. 主语是 the number，谓语用单数\n  - 规则：the number of + 复数名词作主语时，真正的主语是 number，谓语用单数\n  - 例句：The number of international students has doubled since 2010.\n  - 限制：a number of（许多）+ 复数名词，谓语用复数\n- ❌ have a great influence to → ✅ have a great influence on 介词用 on\n  - 规则：influence 作名词表示“对……的影响”时，介词用 on\n\n\u003c!-- 整组设成“资料”：标签写在标题后面 -->\n# 零散积累【资料】\n- a double-edged sword 一把双刃剑\n  - 例句：Technology is a double-edged sword.\n- strike a balance between A and B 在 A 和 B 之间取得平衡【记忆】\n"};
-const CHANGELOG = [{"version": "v12", "date": "2026-10-17", "notes": ["修复：晚上开始、过了午夜才学完的一组，今日学习和首页都按学完的那一天算（和“已学”、打卡同一天），不会再让你重新选一组；以前学完的组也按新规则重新算"]}, {"version": "v11", "date": "2026-10-16", "notes": ["今日新学可以自己选话题：首页和今日学习都有“换一个话题”，按大主题列出还有没学论点的话题", "主菜每天学几组可以改（编排设置里 1–6 组）；今日学习显示“今天 n / m 组”，学完一组接着推荐下一组", "今日学习的主菜不再列出全部话题，只放一张“今天学这个”卡，下面可以看全部话题", "范文默写直接在文章里的空格写：写完按回车检查，检查、提示、看答案在屏幕下方的操作条里，不用翻页（范文页练习、新学的范文填空、复习的范文填空都一样）", "写过的内容一直保留：切换默写方式、看提示、换论点都不丢；每个论点的默写练习单独保存，关掉 App 再打开也还在，只有“重新开始”（点两次）才清空", "空格更大，写得长会自动变宽、换行，完整显示；检查后在原处显示对错"]}, {"version": "v10", "date": "2026-10-16", "notes": ["搬到独立网站：主地址永远是最新版，添加到主屏幕一次就够了；以前的每个版本都单独保留", "数据保护：所有版本共用同一份数据；每天、换新版本、找回 / 恢复 / 清空之前都会自动备份，设置里能一键恢复", "存储空间不够时先腾出旧的自动备份，还是存不下会明确提醒；读不出来的数据原样另存，不会被覆盖", "每 7 天提醒导出一次备份", "包含 v9 的全部功能：从空白开始、导入格式说明和模板、考前冲刺、今日学习时间线、配菜、学习记录、详情页、导入、编辑"]}, {"version": "v9", "date": "2026-10-15", "site": "old", "notes": ["从空白开始，导入格式说明和模板，考前冲刺，找回以前导入的内容"]}];
+const CHANGELOG = [{"version": "v13", "date": "2026-10-17", "notes": ["学习日从凌晨 4 点开始：凌晨 4 点前学的、复习的、打的卡都算前一天；页面上的日期、今天到期的复习、每天几组、打卡日历都按这个算", "已经存下的复习日期、考试日期、打卡记录都不变"]}, {"version": "v12", "date": "2026-10-17", "notes": ["修复：晚上开始、过了午夜才学完的一组，今日学习和首页都按学完的那一天算（和“已学”、打卡同一天），不会再让你重新选一组；以前学完的组也按新规则重新算"]}, {"version": "v11", "date": "2026-10-16", "notes": ["今日新学可以自己选话题：首页和今日学习都有“换一个话题”，按大主题列出还有没学论点的话题", "主菜每天学几组可以改（编排设置里 1–6 组）；今日学习显示“今天 n / m 组”，学完一组接着推荐下一组", "今日学习的主菜不再列出全部话题，只放一张“今天学这个”卡，下面可以看全部话题", "范文默写直接在文章里的空格写：写完按回车检查，检查、提示、看答案在屏幕下方的操作条里，不用翻页（范文页练习、新学的范文填空、复习的范文填空都一样）", "写过的内容一直保留：切换默写方式、看提示、换论点都不丢；每个论点的默写练习单独保存，关掉 App 再打开也还在，只有“重新开始”（点两次）才清空", "空格更大，写得长会自动变宽、换行，完整显示；检查后在原处显示对错"]}, {"version": "v10", "date": "2026-10-16", "notes": ["搬到独立网站：主地址永远是最新版，添加到主屏幕一次就够了；以前的每个版本都单独保留", "数据保护：所有版本共用同一份数据；每天、换新版本、找回 / 恢复 / 清空之前都会自动备份，设置里能一键恢复", "存储空间不够时先腾出旧的自动备份，还是存不下会明确提醒；读不出来的数据原样另存，不会被覆盖", "每 7 天提醒导出一次备份", "包含 v9 的全部功能：从空白开始、导入格式说明和模板、考前冲刺、今日学习时间线、配菜、学习记录、详情页、导入、编辑"]}, {"version": "v9", "date": "2026-10-15", "site": "old", "notes": ["从空白开始，导入格式说明和模板，考前冲刺，找回以前导入的内容"]}];
 
 (function () {
 'use strict';
@@ -1685,9 +1685,14 @@ const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 const DAY = 864e5;
-function dayStart(t = Date.now()) { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); }
+/* 学习日从凌晨 4 点开始（v13）：凌晨 4 点前学的、打的卡都算前一天。
+   存下来的“日期”（复习日、考试日等）都是那天 0 点，原样当日期用；其他时刻先往前挪 4 小时再算是哪天 */
+const DAY_SHIFT = 4 * 3600e3;
+const isDateValue = t => { const d = new Date(t); return !d.getHours() && !d.getMinutes() && !d.getSeconds() && !d.getMilliseconds(); };
+const studyT = t => isDateValue(t) ? t : t - DAY_SHIFT;
+function dayStart(t = Date.now()) { const d = new Date(studyT(t)); d.setHours(0, 0, 0, 0); return d.getTime(); }
 function addDays(t, n) { const d = new Date(dayStart(t)); d.setDate(d.getDate() + n); return d.getTime(); }
-function dayKey(t = Date.now()) { const d = new Date(t); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function dayKey(t = Date.now()) { const d = new Date(studyT(t)); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
 function diffDays(t) { return Math.round((dayStart(t) - dayStart()) / DAY); }
 function relDay(t) {
   const d = diffDays(t);
@@ -1739,7 +1744,7 @@ function toast(msg) {
 // - 读不懂的数据绝不覆盖，先原样另存一份；存储空间不够时先腾出旧的自动备份，还是存不下就明确提醒
 // - 旧版本预览（window.__ARCHIVE）用数据的副本，改动不会碰到真正的记录
 const DATA_KEY = 'ielts-writing-v9';
-const APP_VERSION = 'v12';
+const APP_VERSION = 'v13';
 const KEY = window.__ARCHIVE ? 'ielts-writing-preview' : DATA_KEY;
 if (window.__ARCHIVE) { try { localStorage.setItem(KEY, localStorage.getItem(DATA_KEY) || ''); } catch (e) {} }
 function defaults() {
@@ -1970,7 +1975,7 @@ function canCheckin() {
 function checkin() {
   const k = dayKey(); const l = S.log[k] || (S.log[k] = {});
   l.checked = true; l.checkedAt = Date.now(); save();
-  toast('已打卡，写入 ' + fmtMD(Date.now()) + ' 的学习记录');
+  toast('已打卡，写入 ' + fmtMD(dayStart()) + ' 的学习记录');
 }
 function streak() {
   let n = 0, t = Date.now();
@@ -2432,7 +2437,7 @@ function vHome() {
 
   return {
     title: S.user.name ? `${greet}，${S.user.name}` : greet,
-    crumb: [fmtMD(Date.now()) + ' · 星期' + WD[new Date().getDay()]],
+    crumb: [fmtMD(dayStart()) + ' · 星期' + WD[new Date(dayStart()).getDay()]],
     body: `${installHint()}
       ${safetyBannerHTML()}
       ${legacyBannerHTML()}
@@ -2523,7 +2528,7 @@ function vToday(r) {
   }
 
   return {
-    title: '今日学习', crumb: [fmtMD(Date.now())],
+    title: '今日学习', crumb: [fmtMD(dayStart())],
     body: `<section class="panel blush-soft"><div class="section-head"><h3>今日复习</h3><span class="hint">${dueN ? `共 ${dueN} 条到期 · 按到期时间和错误记录排序` : '由系统按到期日期生成'}</span></div>${review}</section>
       <section class="section"><div class="section-head"><h3>今日新学</h3><span class="hint">${ui.todayCat === 'topic' ? '一次学一个话题里的 3 个论点，约 12 条记忆内容' : '每次学习一个完整的表达组，建议 15–20 条记忆内容'}</span></div>${newPart}</section>`,
   };
@@ -3157,7 +3162,7 @@ function vSearch(r) {
   return { title: '搜索', crumb: [q ? `“${r.id}”` : ''], body: q ? (n ? `<p class="note-line">找到 ${n} 条</p>${t3.length ? t3Rows(t3.slice(0, 60)) : ''}${ids.length ? resultRows(ids.slice(0, 60)) : ''}${old.length ? `<div class="section-head"><span class="hint">旧版主题表达组</span></div>${resultRows(old.slice(0, 40))}` : ''}` : '<div class="empty"><h3>没有找到匹配的表达</h3><p>可以试试英文里的一个词，或中文的关键字。</p></div>') : '<p class="warm">输入英文或中文关键词搜索三类内容。</p>' };
 }
 function vRecords() {
-  const now = new Date();
+  const now = new Date(dayStart());
   if (!ui.calMonth) ui.calMonth = [now.getFullYear(), now.getMonth()];
   const [y, m] = ui.calMonth;
   const first = new Date(y, m, 1), days = new Date(y, m + 1, 0).getDate(), lead = first.getDay();
@@ -4157,7 +4162,7 @@ function t3RevDone() {
   const tmr = t3dueOn(tomorrow);
   const nArgs = Object.keys(log.args).length, nMk = Object.keys(log.mk).length;
   return {
-    title: '今日复习完成', crumb: [fmtMD(Date.now())], focus: true,
+    title: '今日复习完成', crumb: [fmtMD(dayStart())], focus: true,
     actions: `<span class="note-line">论点 ${nArgs} 个 · 补练 ${nMk} 条 · 话题词汇 ${terms.length} 个</span>`,
     body: `<div class="session wide">
       ${argRows ? `<div class="section"><div class="section-head"><span class="note-line">论点 · 点箭头展开每一条；在这里改评分，复习日期会跟着重新算</span></div>${argRows}</div>` : ''}
@@ -4728,7 +4733,7 @@ const rdots3 = hist => `<span class="r-dots">${hist.slice(-4).map(r => `<i class
 
 /* ---------- 概览 ---------- */
 function recOverview(all) {
-  const now = new Date();
+  const now = new Date(dayStart());
   if (!ui.calMonth) ui.calMonth = [now.getFullYear(), now.getMonth()];
   const [y, m] = ui.calMonth;
   const first = new Date(y, m, 1), days = new Date(y, m + 1, 0).getDate();
@@ -4822,7 +4827,7 @@ function dayEntries(t, all) {
   return rows;
 }
 function recSched(all) {
-  const now = new Date();
+  const now = new Date(dayStart());
   if (!ui.calMonth) ui.calMonth = [now.getFullYear(), now.getMonth()];
   const [y, m] = ui.calMonth, first = new Date(y, m, 1), days = new Date(y, m + 1, 0).getDate();
   const today = dayStart(), sel = ui.recDay || addDays(Date.now(), 1);
@@ -6120,7 +6125,7 @@ function sdProg(ses, doneAll) {
 
 /* ---------- 今日学习：时间线（复习 → 主菜 → 配菜） ---------- */
 function vTodaySide() {
-  if (libEmpty()) return { title: '今日学习', crumb: [fmtMD(Date.now())], body: emptyLibHTML() };
+  if (libEmpty()) return { title: '今日学习', crumb: [fmtMD(dayStart())], body: emptyLibHTML() };
   const D = sd(), ids = sdList();
   const P = t3plan(), pend = t3Pend(), sdue = sdDue();
   const oldQ = dueQueue(), oldN = oldQ.reduce((a, g) => a + g.ids.length, 0);
@@ -6172,7 +6177,7 @@ function vTodaySide() {
   const oldNew = S.newSession ? `<div class="row" style="background:var(--paper)"><div class="body"><span class="title">上一版的新学还没做完 · ${esc((GROUPS.get(S.newSession.gid) || {}).name || '')}</span><span class="meta">v4 的新学流程，继续做完或放弃</span></div><div class="btn-row"><button class="btn btn-ghost btn-sm btn-danger" type="button" data-a="dropnew" data-confirm="确认放弃">放弃</button><button class="btn btn-outline btn-sm" type="button" data-a="resumenew">继续</button></div></div>` : '';
   const ck = steps.every(Boolean) && canCheckin();
   return {
-    title: '今日学习', crumb: [fmtMD(Date.now())],
+    title: '今日学习', crumb: [fmtMD(dayStart())],
     body: `<div class="s-wrap">
       <div class="s-progress"><b>今天大约 ${mins} 分钟</b><span class="bar"><i style="width:${doneN / totN * 100}%"></i></span><span class="note-line" style="color:var(--sage-deep)">已完成 ${doneN} / ${totN}</span></div>
       ${spBannerHTML()}
